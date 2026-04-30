@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>DealerDefense™ by CARZMOOD</title>
+<meta name="description" content="Never get ripped off buying a used car. Real federal data. Real verdict.">
+<meta name="theme-color" content="#060b14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DealerDefense">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://gumroad.com/js/gumroad.js" async></script>
+<style>
+:root{
+  --bg:#060b14;--bg2:#0c1320;--card:#101928;--card2:#192233;
+  --border:#1c2b3f;--border2:#243348;
+  --teal:#2dd4bf;--teal2:#14b8a6;--teal-glow:rgba(45,212,191,0.15);--teal-glow2:rgba(45,212,191,0.08);
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--muted:#4a6080;--muted2:#637d9e;
+  --text:#e2e8f0;--text2:#94a3b8;
+  --fh:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+  --r:14px;--rs:8px;--sh:0 4px 24px rgba(0,0,0,0.5);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);overscroll-behavior:none}
+body{font-family:var(--fh);font-size:15px;line-height:1.5}
+#app{max-width:460px;margin:0 auto;min-height:100dvh;position:relative;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+select,input,button,textarea{font-family:inherit;font-size:15px}
+select option{background:var(--bg2);color:var(--text)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--teal-glow)}50%{box-shadow:0 0 0 10px transparent}}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes orbit{0%{transform:rotate(0deg) translateX(22px) rotate(0deg)}100%{transform:rotate(360deg) translateX(22px) rotate(-360deg)}}
+@keyframes ripple{0%{transform:scale(1);opacity:0.7}100%{transform:scale(2.2);opacity:0}}
+@keyframes scanline{0%{top:-10%}100%{top:110%}}
+@keyframes termtype{from{width:0}to{width:100%}}
+@keyframes waitBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes waitSpin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.2)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes waitPulseRing{0%{box-shadow:0 0 0 0 rgba(45,212,191,0.6)}100%{box-shadow:0 0 0 20px transparent}}
+@keyframes glitch1{0%,100%{clip-path:inset(50% 0 30% 0)}25%{clip-path:inset(10% 0 60% 0)}75%{clip-path:inset(70% 0 5% 0)}}
+@keyframes glitch2{0%,100%{clip-path:inset(20% 0 70% 0)}25%{clip-path:inset(60% 0 15% 0)}75%{clip-path:inset(5% 0 80% 0)}}
+.fade-up{animation:fadeUp 0.38s cubic-bezier(.16,1,.3,1) both}
+.fade-in{animation:fadeIn 0.25s ease both}
+
+/* WAITING ANIMATION */
+.wait-anim{display:inline-flex;align-items:center;justify-content:center;gap:5px}
+.wait-anim span{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:waitBounce 0.9s ease infinite}
+.wait-anim span:nth-child(2){animation-delay:0.15s}
+.wait-anim span:nth-child(3){animation-delay:0.3s}
+.wait-spinner{width:18px;height:18px;border:2.5px solid rgba(45,212,191,0.25);border-top-color:var(--teal);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.btn{width:100%;padding:17px;border:none;border-radius:var(--r);font-size:16px;font-weight:800;cursor:pointer;letter-spacing:0.2px;transition:opacity 0.15s,transform 0.1s,background 0.2s;font-family:var(--fh)}
+.btn:active{transform:scale(0.98);opacity:0.9}
+.btn-primary{background:var(--teal);color:#000}
+.btn-primary:hover{background:var(--teal2)}
+.btn-ghost{background:var(--card);color:var(--text);border:1px solid var(--border2)}
+.btn-red{background:#ef444422;color:var(--red);border:1px solid #ef444430}
+.btn:disabled{background:var(--card2);color:var(--muted);cursor:not-allowed;transform:none;opacity:1}
+.inp{width:100%;padding:14px 16px;background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r);color:var(--text);font-size:15px;transition:border-color 0.2s;font-family:var(--fh)}
+.inp:focus{outline:none;border-color:var(--teal)}
+.inp::placeholder{color:var(--muted)}
+.inp:disabled{opacity:0.4;cursor:not-allowed}
+.lbl{display:block;font-size:11px;font-family:var(--fm);color:var(--muted2);margin-bottom:8px;letter-spacing:1.5px;text-transform:uppercase}
+.back-btn{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:14px;font-weight:700;padding:4px 0;display:flex;align-items:center;gap:6px;transition:color 0.2s;font-family:var(--fh)}
+.back-btn:hover{color:var(--text)}
+.tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-family:var(--fm);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.tag-red{background:#ef444420;color:var(--red);border:1px solid #ef444430}
+.tag-amber{background:#f59e0b20;color:var(--amber);border:1px solid #f59e0b30}
+.tag-green{background:#22c55e20;color:var(--green);border:1px solid #22c55e30}
+.tag-teal{background:var(--teal-glow2);color:var(--teal);border:1px solid rgba(45,212,191,0.25)}
+.err-box{background:#ef444412;border:1px solid #ef444430;border-radius:var(--rs);padding:12px 14px;font-size:13px;color:#fca5a5;line-height:1.5}
+.ok-box{background:#22c55e12;border:1px solid #22c55e30;border-radius:var(--rs);padding:12px 14px;font-size:13px;color:#86efac;line-height:1.5}
+.info-box{background:var(--teal-glow2);border:1px solid rgba(45,212,191,0.2);border-radius:var(--rs);padding:12px 14px;font-size:13px;color:var(--teal);line-height:1.5}
+
+#topBar{position:sticky;top:0;z-index:100;background:rgba(6,11,20,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.token-badge{background:var(--teal-glow);border:1px solid rgba(45,212,191,0.35);border-radius:20px;padding:6px 13px;font-size:12px;font-family:var(--fm);color:var(--teal);cursor:pointer;white-space:nowrap;transition:background 0.2s}
+.token-badge:hover{background:rgba(45,212,191,0.2)}
+
+/* FEEDBACK BUBBLE */
+#fbBubble{position:fixed;bottom:24px;right:20px;z-index:200;width:58px;height:58px;border-radius:50%;background:var(--teal);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 4px 20px rgba(45,212,191,0.35);transition:transform 0.2s;animation:pulse 3s ease infinite}
+#fbBubble:hover{transform:scale(1.12)}
+.fb-tooltip{position:fixed;bottom:84px;right:18px;z-index:199;background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(6px) scale(0.95);transition:opacity 0.25s,transform 0.25s;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+.fb-tooltip.show{opacity:1;transform:translateY(0) scale(1)}
+.fb-tooltip::after{content:'';position:absolute;bottom:-6px;right:19px;width:10px;height:10px;background:var(--card);border-right:1px solid var(--border2);border-bottom:1px solid var(--border2);transform:rotate(45deg)}
+
+#fbPanel{position:fixed;bottom:0;left:0;right:0;max-width:460px;margin:0 auto;z-index:300;background:var(--card);border-top:1px solid var(--border);border-radius:20px 20px 0 0;padding:24px 20px 32px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(.16,1,.3,1)}
+#fbPanel.open{transform:translateY(0)}
+#fbOverlay{position:fixed;inset:0;z-index:250;background:rgba(0,0,0,0.65);opacity:0;pointer-events:none;transition:opacity 0.3s}
+#fbOverlay.open{opacity:1;pointer-events:all}
+#installBar{display:none}
+#installBar.visible{display:block}
+
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:500;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s}
+.splash-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;opacity:0.25}
+.logo-ring{width:80px;height:80px;border-radius:22px;background:var(--teal-glow);border:2px solid rgba(45,212,191,0.5);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;animation:pulse 2s ease infinite}
+.splash-title{font-size:34px;font-weight:900;color:var(--teal);letter-spacing:-1.5px;margin-top:18px;font-family:var(--fh)}
+
+/* TERMINAL */
+.terminal{background:#01080a;border:1px solid #0c2a1a;border-radius:var(--r);padding:18px;font-family:var(--fm);font-size:12px;overflow-y:auto;line-height:2;flex:1;min-height:260px;position:relative}
+.terminal::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(transparent,rgba(34,197,94,0.4),transparent);animation:scanline 3s linear infinite;z-index:1;pointer-events:none}
+.term-line{display:flex;gap:8px;align-items:flex-start}
+.term-prompt{color:#16522a;flex-shrink:0}
+.term-text{color:#22c55e}
+.term-text.done{color:#4ade80}
+.term-cursor{display:inline-block;animation:blink 0.9s infinite;color:#22c55e}
+
+/* FULL-SCREEN TERMINAL OVERLAY */
+#termOverlay{position:fixed;inset:0;z-index:600;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px}
+#termOverlay.active{display:flex}
+#termOverlayBox{width:100%;max-width:420px;background:#01080a;border:1px solid #0c2a1a;border-radius:14px;padding:22px;font-family:'DM Mono',monospace;font-size:13px;min-height:220px;position:relative;overflow:hidden}
+#termOverlayBox::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(transparent,rgba(34,197,94,0.5),transparent);animation:scanline 2.5s linear infinite;pointer-events:none}
+.term-ov-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #0c2a1a}
+.term-ov-dot{width:10px;height:10px;border-radius:50%}
+.term-ov-title{font-size:11px;color:#22c55e;letter-spacing:3px;text-transform:uppercase}
+.term-ov-line{color:#22c55e;line-height:2.2;opacity:0;animation:fadeIn 0.3s ease forwards}
+.term-ov-line .prompt{color:#165228}
+.term-ov-oracle{color:#4ade80;font-weight:700}
+
+/* AUTH */
+.auth-tab{display:flex;background:var(--card);border-radius:var(--r);padding:4px;margin-bottom:22px}
+.auth-tab button{flex:1;padding:11px;border:none;border-radius:var(--rs);background:transparent;color:var(--muted2);font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:var(--fh)}
+.auth-tab button.active{background:var(--teal);color:#000}
+
+/* PASSWORD TOGGLE */
+.pass-wrap{position:relative}
+.pass-wrap .inp{padding-right:48px}
+.pass-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted2);font-size:18px;padding:4px;transition:color 0.2s;line-height:1}
+.pass-eye:hover{color:var(--teal)}
+
+.progress-bar{height:4px;background:var(--card2);border-radius:4px;overflow:hidden;margin-top:10px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal2),var(--teal));border-radius:4px;transition:width 0.4s ease}
+
+.check-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;transition:border-color 0.2s,background 0.2s}
+.check-card.pass{border-color:rgba(34,197,94,0.45)!important;background:rgba(34,197,94,0.04)!important}
+.check-card.fail{border-color:rgba(239,68,68,0.45)!important;background:rgba(239,68,68,0.04)!important}
+.check-btn{padding:14px;border:1.5px solid var(--border);border-radius:var(--rs);background:var(--bg2);color:var(--muted2);font-weight:800;font-size:14px;cursor:pointer;width:100%;transition:all 0.18s;font-family:var(--fh);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.check-btn:active{transform:scale(0.96)}
+.check-btn.pass-active{background:var(--green)!important;border-color:var(--green)!important;color:#000!important}
+.check-btn.fail-active{background:var(--red)!important;border-color:var(--red)!important;color:#fff!important}
+
+.modal-overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0.8);display:flex;align-items:flex-end;justify-content:center}
+.modal-sheet{background:var(--card);border-radius:22px 22px 0 0;padding:24px 20px 44px;width:100%;max-width:460px;animation:slideUp 0.35s cubic-bezier(.16,1,.3,1)}
+.pack-card{background:var(--bg2);border:2px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s;position:relative}
+.pack-card:hover{border-color:var(--teal)}
+.pack-card.featured{border-color:var(--teal);background:var(--teal-glow2)}
+.popular-badge{position:absolute;top:-10px;right:16px;background:var(--teal);color:#000;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;font-family:var(--fm);letter-spacing:0.5px}
+
+.section-title{font-size:11px;font-family:var(--fm);color:var(--muted2);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.divider{height:1px;background:var(--border);margin:18px 0}
+.acct-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.acct-row:last-child{border-bottom:none}
+
+/* NEGOTIATION LEVERAGE CARD */
+.leverage-card{background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(239,68,68,0.03));border:1px solid rgba(239,68,68,0.3);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.leverage-card.medium{background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border-color:rgba(245,158,11,0.3)}
+.leverage-card.standard{background:var(--teal-glow2);border-color:rgba(45,212,191,0.25)}
+.leverage-badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-family:var(--fm);font-weight:700;letter-spacing:0.5px;margin-bottom:8px}
+.leverage-badge.high{background:rgba(239,68,68,0.2);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+.leverage-badge.medium{background:rgba(245,158,11,0.2);color:var(--amber);border:1px solid rgba(245,158,11,0.3)}
+.leverage-badge.standard{background:var(--teal-glow);color:var(--teal);border:1px solid rgba(45,212,191,0.3)}
+
+/* GHOST HISTORY PROTOCOL */
+.ghost-card{background:linear-gradient(135deg,rgba(99,77,158,0.1),rgba(99,77,158,0.04));border:1px solid rgba(139,92,246,0.25);border-radius:var(--r);padding:16px;margin-bottom:10px}
+
+/* ORACLE SECTION */
+.oracle-section{background:linear-gradient(135deg,rgba(45,212,191,0.06),rgba(45,212,191,0.02));border:1px solid rgba(45,212,191,0.2);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.oracle-label{font-size:10px;font-family:var(--fm);color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+
+/* COUNTRY SELECT */
+.country-select-wrap{position:relative}
+.country-select-wrap select{appearance:none;-webkit-appearance:none;padding-right:36px}
+.country-select-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted2);pointer-events:none;font-size:12px}
+
+/* LEVEL 2 PAGE */
+.level2-page{background:var(--bg);min-height:100dvh}
+.level2-header{background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border-bottom:1px solid rgba(245,158,11,0.25);padding:14px 20px}
+
+/* RESULTS DISCLAIMER FOOTER */
+.results-disclaimer{background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.2);border-radius:var(--rs);padding:14px;margin-top:4px;margin-bottom:20px;font-size:11px;color:var(--muted);line-height:1.7;text-align:center}
+.results-disclaimer strong{color:var(--muted2)}
+
+/* CONFIDENCE INDICATOR */
+.confidence-bar{height:6px;border-radius:4px;overflow:hidden;background:var(--card2);margin-top:6px}
+.confidence-fill-high{height:100%;background:linear-gradient(90deg,var(--green),#4ade80);border-radius:4px}
+.confidence-fill-med{height:100%;background:linear-gradient(90deg,var(--amber),#fcd34d);border-radius:4px}
+.confidence-fill-low{height:100%;background:linear-gradient(90deg,var(--muted),var(--muted2));border-radius:4px}
+
+/* TOS CHECKBOX */
+.tos-wrap{display:flex;align-items:flex-start;gap:12px;background:rgba(45,212,191,0.04);border:1px solid rgba(45,212,191,0.18);border-radius:var(--rs);padding:14px;margin-top:6px}
+.tos-wrap input[type=checkbox]{width:20px;height:20px;accent-color:var(--teal);cursor:pointer;flex-shrink:0;margin-top:1px}
+.tos-wrap label{font-size:12px;color:var(--text2);line-height:1.7;cursor:pointer}
+.tos-wrap a{color:var(--teal);text-decoration:none}
+.tos-wrap a:hover{text-decoration:underline}
+
+/* SOURCE LABEL */
+.src-label{display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px 9px;font-size:10px;font-family:var(--fm);color:var(--muted2)}
+.src-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* VIN INPUT */
+.vin-section{background:rgba(45,212,191,0.04);border:1px dashed rgba(45,212,191,0.25);border-radius:var(--rs);padding:14px;margin-top:6px}
+</style>
+</head>
+<body>
+
+<div id="installBar" onclick="installPWA()" style="display:none;background:linear-gradient(135deg,rgba(45,212,191,0.15),rgba(45,212,191,0.06));border-bottom:1px solid rgba(45,212,191,0.25);padding:12px 20px;cursor:pointer">
+  <div style="display:flex;align-items:center;justify-content:space-between;max-width:460px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:22px">📲</div>
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#2dd4bf">Add to Home Screen</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:1px">Works like a native app — no App Store</div>
+      </div>
+    </div>
+    <div style="background:#2dd4bf;color:#000;font-size:12px;font-weight:900;padding:7px 14px;border-radius:20px;white-space:nowrap;font-family:'DM Mono',monospace">Install →</div>
+  </div>
+</div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-grid"></div>
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center">
+    <div class="logo-ring">🛡️</div>
+    <div class="splash-title">DealerDefense</div>
+    <div style="font-size:11px;font-family:var(--fm);color:var(--muted);letter-spacing:3px;margin-top:6px">BY CARZMOOD</div>
+    <div style="font-size:12px;font-family:var(--fm);color:var(--muted);margin-top:28px;animation:blink 1.2s infinite" id="splashMsg">Starting up your car check tool...</div>
+  </div>
+</div>
+
+<!-- FULL-SCREEN TERMINAL OVERLAY -->
+<div id="termOverlay">
+  <div id="termOverlayBox">
+    <div class="term-ov-header">
+      <div class="term-ov-dot" style="background:#ef4444"></div>
+      <div class="term-ov-dot" style="background:#f59e0b"></div>
+      <div class="term-ov-dot" style="background:#22c55e"></div>
+      <div class="term-ov-title">DEALERDEFENSE™ — CHECKING YOUR CAR</div>
+    </div>
+    <div id="termOverlayLines"></div>
+  </div>
+  <div style="margin-top:20px;font-size:11px;font-family:'DM Mono',monospace;color:rgba(34,197,94,0.4);letter-spacing:2px">RUNNING CHECKS — PLEASE WAIT</div>
+</div>
+
+<div id="app"></div>
+
+<!-- FEEDBACK BUBBLE -->
+<div class="fb-tooltip" id="fbTooltip">💬 Send Us a Message</div>
+<button id="fbBubble" title="Send us a message" aria-label="Send us a message">
+  <span style="display:flex;flex-direction:column;align-items:center;gap:2px">
+    <span style="font-size:18px;line-height:1">💬</span>
+    <span style="font-size:8px;font-weight:900;font-family:'DM Mono',monospace;letter-spacing:0.5px;color:#000;line-height:1">FEEDBACK</span>
+  </span>
+</button>
+<div id="fbOverlay" onclick="closeFeedback()"></div>
+<div id="fbPanel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+    <div style="font-size:18px;font-weight:800">💬 Send Us a Message</div>
+    <button onclick="closeFeedback()" style="background:none;border:none;color:var(--muted2);font-size:24px;cursor:pointer;line-height:1">×</button>
+  </div>
+  <textarea id="fbText" class="inp" rows="4" placeholder="Found a bug? Have an idea? We read everything." style="resize:none;margin-bottom:12px;font-family:var(--fm);font-size:13px"></textarea>
+  <button class="btn btn-primary" onclick="submitFeedback()">Send Message →</button>
+  <div id="fbStatus" style="text-align:center;font-size:13px;color:var(--muted2);margin-top:10px;height:20px"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════
+const CFG = {
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbwrD8eXkPmLRGeLSZ0cQNayDoErSMjFrvhfWaNMduqC3upKJhRbPJ7sEYeJED-fcWg/exec',
+  GUMROAD: {
+    PACK10:  'https://carzmood.gumroad.com/l/tokens10',
+    PACK50:  'https://carzmood.gumroad.com/l/tokens50',
+    PACK200: 'https://carzmood.gumroad.com/l/tokens200',
+  },
+  FREE_TOKENS: 3
+};
+
+const MAKES = ["ACURA","ALFA ROMEO","AUDI","BMW","BUICK","CADILLAC","CHEVROLET","CHRYSLER","DODGE","FORD","GMC","HONDA","HYUNDAI","INFINITI","JAGUAR","JEEP","KIA","LAND ROVER","LEXUS","LINCOLN","MAZDA","MERCEDES-BENZ","MINI","MITSUBISHI","NISSAN","PONTIAC","PORSCHE","RAM","SATURN","SCION","SUBARU","SUZUKI","TESLA","TOYOTA","VOLKSWAGEN","VOLVO"];
+const YEARS = Array.from({length:40},(_,i)=>2026-i);
+
+const COUNTRIES = [
+  {code:'USA',name:'🇺🇸 United States (NHTSA)'},
+  {code:'UK',name:'🇬🇧 United Kingdom (DVSA)'},
+  {code:'AUSTRALIA',name:'🇦🇺 Australia (Product Safety AU)'},
+  {code:'CANADA',name:'🇨🇦 Canada (Transport Canada)'},
+  {code:'GERMANY',name:'🇩🇪 Germany (KBA)'},
+  {code:'JAPAN',name:'🇯🇵 Japan (MLIT)'},
+  {code:'FRANCE',name:'🇫🇷 France'},
+  {code:'ITALY',name:'🇮🇹 Italy'},
+  {code:'SPAIN',name:'🇪🇸 Spain'},
+  {code:'NETHERLANDS',name:'🇳🇱 Netherlands'},
+  {code:'SWEDEN',name:'🇸🇪 Sweden'},
+  {code:'NORWAY',name:'🇳🇴 Norway'},
+  {code:'SOUTH AFRICA',name:'🇿🇦 South Africa'},
+  {code:'UAE',name:'🇦🇪 UAE'},
+  {code:'SINGAPORE',name:'🇸🇬 Singapore'},
+  {code:'NEW ZEALAND',name:'🇳🇿 New Zealand'},
+  {code:'OTHER',name:'🌍 Other / International'},
+];
+
+// ═══════════════════════════════════════════════════
+// KNOWLEDGE BASE — Known issues by make/model/year
+// ═══════════════════════════════════════════════════
+const KB = {
+  TOYOTA:{
+    _:['Inspect timing chain/belt service records','Check valve cover gasket for oil seeps'],
+    CAMRY:{'2007:2011':['⚠️ 2AZ-FE engine documented oil consumption — pull dipstick NOW, check level and color. Ask seller for all oil receipts.','Check for sludge buildup if oil changes were irregular'],'2012:2017':['Brake actuator pump failure — check if recall was completed','Inspect transmission fluid: should be pink/red, never black'],'2018:2026':['Excellent reliability. Standard checks apply.']},
+    COROLLA:{'2003:2008':['Check wheel arches and undercarriage for rust','Listen for timing chain rattle on cold start'],'2009:2013':['⚠️ 1ZR-FE engine oil consumption documented — ask owner how often they add oil'],'2014:2026':['Very reliable. Standard checks.']},
+    PRIUS:{'2004:2009':['⚠️ Hybrid battery health — replacement costs $1,500–$3,500. Ask about battery check history.','Check inverter water pump recall status'],'2010:2015':['HV battery degradation over 100k miles — test regenerative braking feel'],'2016:2026':['Excellent. Check battery charge rate.']},
+    TACOMA:{'2005:2010':['🚨 FRAME RUST — Toyota extended warranty covers frame rust on these years. Get under the truck. Structural safety hazard if severe.','Check leaf springs for cracks and rust'],'2016:2022':['Known transmission judder/shudder at low speeds on 6-speed auto. Test slow acceleration carefully.'],'2023:2026':['New gen — check infotainment bugs']},
+    '4RUNNER':{'2003:2009':['Frame rust extended warranty — inspect frame rails carefully','Check rear main seal for oil leaks'],'2010:2026':['Very reliable. Standard checks.']},
+    HIGHLANDER:{'2001:2007':['Sludge risk if oil changes were skipped — check oil condition and dipstick smell'],'2008:2013':['Check timing belt service history on V6 (required every 90k)'],'2014:2026':['Good reliability.']},
+    RAV4:{'2006:2012':['Listen for timing chain noise on cold start'],'2019:2026':['Excellent. Check infotainment.']},
+    TUNDRA:{'2005:2009':['Check frame for rust (recall issued)','Inspect for exhaust manifold cracking on 5.7L'],'2010:2021':['Generally very reliable. Standard checks.']},
+  },
+  HONDA:{
+    _:['Honda ATF must be pink — dark fluid = neglected transmission','Listen for VTEC engagement — should be smooth'],
+    CIVIC:{'2001:2005':['🚨 Automatic transmission failure very common — budget $2k–$4k. Test every gear, including Reverse.','Check wheel wells for rust'],'2006:2011':['Check oil consumption on 2.0L R20A — ask about oil usage between changes','Test all power windows (regulators fail)'],'2016:2021':['⚠️ 1.5T turbo: documented oil dilution with gasoline in cold climates. Check oil NOW — should NOT smell like fuel.'],'2022:2026':['Good reliability. Check infotainment.']},
+    ACCORD:{'1998:2002':['🚨 V6 automatic transmission failure — very common. Non-negotiable check.','Rust on rear wheel wells'],'2003:2007':['Check transmission fluid carefully','Test all windows'],'2013:2017':['Check CVT for shudder if equipped'],'2018:2022':['⚠️ 1.5T: oil dilution in cold climates — check oil now','2.0T: check turbo for carbon hesitation']},
+    CRV:{'2012:2016':['Listen for timing chain tick on cold start'],'2017:2021':['🚨 1.5T engine documented oil contamination with fuel — CRITICAL. Check oil level and smell it. If it smells like gasoline, walk away.'],'2022:2026':['Good reliability.']},
+    ODYSSEY:{'1999:2004':['🚨 Automatic transmission failure is notorious — budget full replacement before buying'],'2005:2010':['Transmission improved — still test all gears'],'2018:2026':['Very reliable.']},
+    PILOT:{'2003:2008':['Check V6 transmission for slipping'],'2016:2026':['9-speed — test for hesitation and rough shifts']},
+  },
+  FORD:{
+    _:['Check rust on cab corners, frame, rockers','Test SYNC/infotainment thoroughly — glitches common'],
+    F150:{'2004:2008':['⚠️ 5.4L Triton 3-valve: spark plugs can break off during removal (expensive). Ask about plug history.','Cam phaser rattle on startup — listen carefully'],'2011:2014':['EcoBoost: check for intercooler condensation misfires in cold weather','Check coolant reservoir for overflow'],'2015:2020':['EcoBoost generally reliable — check for coolant leaks','Frame rust check'],'2021:2026':['PowerBoost hybrid — check for software glitches']},
+    FUSION:{'2010:2012':['⚠️ PowerShift DCT transmission — shudder, hesitation, lurching at low speed. Test slowly from a stop.'],'2013:2020':['Check MyFord Touch responsiveness','Door seal leaks — check carpet for moisture']},
+    FOCUS:{'2012:2018':['🚨 PowerShift DCT transmission is defective — Ford settled class action. Symptoms: shudder, hesitation, lunging. Demand documentation of repair or WALK AWAY.']},
+    MUSTANG:{'2005:2010':['Check IRS differential and rear axle seals for leaks'],'2015:2023':['Inspect for track or burnout abuse — check tire wear, smell brakes']},
+    EXPLORER:{'2011:2017':['⚠️ Exhaust fumes entering cabin — documented recall. Check all body seals around cargo area.','Check PTU (rear transfer unit) for leaks — expensive fix'],'2020:2026':['Check for transmission shudder']},
+    ESCAPE:{'2013:2016':['⚠️ 1.6T engine: coolant can enter cylinder — fire risk. Check coolant reservoir for bubbles.'],'2020:2026':['Generally improved.']},
+  },
+  CHEVROLET:{
+    _:['⚠️ Check AFM/DoD lifter tick on V8 engines — common on 5.3L and 6.2L','Inspect frame and undercarriage for rust'],
+    SILVERADO:{'2007:2013':['🚨 5.3L V8 AFM lifter failure — listen for tick/tap on cold startup. Repair cost: $2,000–$5,000. High failure rate.','Check for oil consumption on 5.3L'],'2014:2019':['AFM still present — check for lifter tick','8-speed transmission shudder at highway speed'],'2020:2026':['DFM replaces AFM — still check for lifter noise on cold start']},
+    EQUINOX:{'2010:2017':['⚠️ 2.4L engine documented oil consumption (1 qt per 1,000 mi reported). Check oil level NOW.','Timing chain wear — listen for cold-start rattle'],'2018:2026':['1.5T — check for coolant leaks']},
+    MALIBU:{'2013:2015':['Excessive oil consumption on 2.5L documented','Check for rough idle or stalling'],'2016:2019':['Generally improved.']},
+    CRUZE:{'2011:2016':['Check turbo for oil leaks','Cooling system hose condition — failures reported']},
+    TAHOE:{'2007:2014':['🚨 AFM lifter failure on 5.3L — same as Silverado. Critical check.','Air suspension: check for sag or compressor noise if equipped'],'2015:2020':['AFM check','8-speed shudder check']},
+  },
+  NISSAN:{
+    _:['⚠️ CVT (automatic) transmission — Nissan CVT has documented reliability issues across many models','Check for CVT whine or shudder — replacement cost $3,500–$8,000'],
+    ALTIMA:{'2013:2018':['🚨 CVT failure rate is high. Listen for whine. Test long acceleration runs. Budget for replacement.','CVT warranty extended on some models — verify'],'2019:2026':['CVT still present — test thoroughly']},
+    ROGUE:{'2014:2020':['🚨 CVT documented failures — test drive carefully. Jerking, hesitation, whine = sign of imminent failure.'],'2021:2026':['New CVT — improved but still check']},
+    SENTRA:{'2013:2019':['CVT shudder at low speed documented'],'2020:2026':['Improved CVT']},
+    MURANO:{'2009:2014':['CVT check. Check for transmission shudder.']},
+  },
+  BMW:{
+    _:['⚠️ Cooling system components (water pump, thermostat, expansion tank) are a known failure point — inspect carefully','⚠️ N54/N55/B58 engines — check for valve cover oil leaks, wastegate rattle','Maintenance costs are very high — budget 2x what you expect'],
+    '3SERIES':{'2006:2011':['🚨 E90/E92: high-pressure fuel pump (HPFP) failures on N54 engine. Ask for full service history.','Cooling system — check all hoses and reservoir'],'2012:2019':['N20/N26 four-cylinder: timing chain tensioner failure documented. Ask about timing service.'],'2020:2026':['B58 — generally reliable for BMW. Standard checks.']},
+    '5SERIES':{'2004:2010':['E60: electronic issues common. Check iDrive, windows, and all accessories.'],'2011:2016':['Turbocharged engines — check for oil leaks from valve cover and turbo lines']},
+    X5:{'2007:2013':['Air suspension check if equipped','Cooling system hoses'],'2014:2026':['B58 engine on later models — more reliable']},
+  },
+  MERCEDES:{
+    _:['⚠️ Air suspension (Airmatic) failures are very common — budget $1,000–$3,500','Electrical system complexity means high diagnostic and repair costs','Check all fluid levels and service history carefully'],
+    'C CLASS':{'2008:2014':['Rust on lower body panels in salt regions','Check transmission for harsh shifts — 722.9 7G-Tronic'],'2015:2021':['Check 9G-Tronic for adaptation reset history']},
+    'E CLASS':{'2003:2009':['Air suspension check — active body control system expensive to repair'],'2010:2016':['Generally reliable for Mercedes — standard checks']},
+    GLE:{'2016:2026':['Air suspension check — very common failure','Check for oil leaks from oil pan gasket']},
+  },
+  SUBARU:{
+    _:['⚠️ Head gasket failure documented on older 2.5L SOHC engines (EJ25) — check coolant color and oil for milkiness','CVT available on newer models — test thoroughly'],
+    OUTBACK:{'2005:2010':['🚨 EJ25 SOHC head gasket failure — external coolant leak is early sign. Check exhaust, coolant level, oil.'],'2011:2014':['EJ25 DOHC improved but still check head gasket area'],'2015:2026':['FA/FB engines — significantly improved. Standard checks.']},
+    FORESTER:{'2004:2010':['🚨 EJ25 SOHC head gasket — same as Outback. Non-negotiable check.'],'2014:2026':['FB25 engine — improved. Standard checks.']},
+    IMPREZA:{'2004:2011':['Head gasket check'],'2012:2026':['FB20 — improved reliability']},
+    WRX:{'2002:2014':['EJ20/EJ25 turbo — check for oil leaks, turbo shaft play, boost leaks'],'2015:2026':['FA20 DIT — check intercooler and turbo reliability']},
+    LEGACY:{'2005:2009':['Head gasket check'],'2010:2026':['FB engine — improved']},
+  },
+  HYUNDAI:{
+    _:['⚠️ Theta II 2.0T and 2.4L engines — subject to engine seizure recall on many models. Verify recall completion.','Check GDI engines for carbon buildup on intake valves'],
+    SONATA:{'2011:2019':['🚨 Theta II engine seizure recall — engine can seize without warning. VERIFY this recall was completed before buying.','Check oil consumption'],'2020:2026':['Improved Smartstream engines — standard checks']},
+    ELANTRA:{'2011:2016':['Nu 2.0L engine — generally reliable'],'2017:2022':['Check for Theta II recall on turbo variants'],'2023:2026':['New platform — standard checks']},
+    TUCSON:{'2011:2015':['Theta II 2.0T recall check'],'2022:2026':['Generally improved']},
+    SANTA_FE:{'2013:2019':['🚨 Lambda V6 or Theta II — verify recall completion'],'2020:2026':['Improved platforms']},
+  },
+  KIA:{
+    _:['⚠️ Theta II 2.0T and 2.4L engines — same seizure recall as Hyundai. Verify completion.','Shared platforms with Hyundai — similar known issues'],
+    OPTIMA:{'2011:2015':['🚨 Theta II engine seizure recall — verify completion'],'2016:2020':['Theta II still — check recall status'],'2021:2026':['Smartstream engines — improved']},
+    SPORTAGE:{'2011:2016':['Theta II recall check'],'2017:2022':['Recall check on turbo models']},
+    SORENTO:{'2011:2016':['Lambda or Theta recall check'],'2021:2026':['Improved']},
+  },
+  VOLKSWAGEN:{
+    _:['DSG (dual-clutch) gearbox — check for shudder, judder at low speed','Timing chain/belt service history critical on most engines','⚠️ DPF (diesel particulate filter) on TDI models — check for blockage or forced regeneration issues'],
+    JETTA:{'2011:2014':['DSG shudder check — common on 1.4T and 2.0T models'],'2015:2022':['Generally improved — standard checks']},
+    PASSAT:{'2012:2019':['1.8T — check for turbo wastegate rattle'],'2020:2026':['Standard checks']},
+    TIGUAN:{'2009:2017':['Timing chain check — critical on 2.0T EA888'],'2018:2026':['EA888 Gen3 — improved but still check timing chain service']},
+    GOLF:{'2015:2021':['DSG check','Timing chain check on 1.8T/2.0T']},
+  },
+  AUDI:{
+    _:['⚠️ Carbon buildup on FSI direct-injection engines — expensive cleaning process','Timing chain tensioner failures documented on some engines','Maintenance costs are high — budget accordingly'],
+    A4:{'2009:2016':['⚠️ 2.0T TFSI oil consumption — check oil level. Ask about oil usage between services.','PCV system failure — check for excessive oil leaks'],'2017:2026':['EA888 Gen3 — improved oil consumption']},
+    Q5:{'2009:2012':['Timing chain, cam follower — critical checks'],'2013:2017':['Improved. Still check timing chain.'],'2018:2026':['Good reliability. Standard premium checks.']},
+    A6:{'2012:2018':['3.0T supercharged — check for supercharger hose leaks and timing chain']},
+  },
+  LEXUS:{
+    _:['Among the most reliable vehicles ever built','Standard checks apply — major issues are rare'],
+    IS:{'2006:2026':['Excellent reliability across all years. Standard checks.']},
+    RX:{'2004:2009':['⚠️ RX400h: check hybrid battery health','Otherwise very reliable'],'2010:2026':['Excellent. Standard checks.']},
+    GX:{'2003:2026':['One of the most reliable SUVs ever made. Standard checks.']},
+    ES:{'2007:2026':['Excellent reliability.']},
+  },
+  TESLA:{
+    _:['Check battery range — compare current % range estimate vs new spec','Inspect panel gaps and paint quality — build quality has improved but varies','Check for wind noise from seal gaps','Test all autopilot and software features'],
+    MODEL3:{'2018:2020':['Early build quality — check panel gaps, paint, trunk seal carefully'],'2021:2026':['Improved. Battery health and charging check.']},
+    MODELS:{'2012:2016':['⚠️ Drive unit whine/vibration documented on early cars','Battery range degradation — compare to new spec'],'2017:2026':['Check suspension ball joint recall. Battery range test.']},
+    MODELY:{'2020:2022':['Check paint quality and panel gaps. Front trunk water intrusion reported.'],'2023:2026':['Generally improved.']},
+  },
+  CADILLAC:{
+    _:['Check magnetic ride suspension if equipped','CUE infotainment had reliability issues on early versions'],
+    ATS:{'2013:2019':['Check valve cover oil leaks','2.0T timing chain check','CUE system reliability']},
+    ESCALADE:{'2007:2013':['🚨 AFM lifter failure on 6.2L V8 — listen for tick on startup','Air suspension leaks very common — budget $800–$2,500'],'2015:2020':['AFM check. Air suspension check.']},
+  },
+  PORSCHE:{
+    _:['⚠️ Maintenance costs are very high — even an oil change runs $300+','Check for track/racing abuse — these attract enthusiast owners','Inspect for performance modifications'],
+    '911':{'1998:2005':['🚨 IMS (Intermediate Shaft Bearing) failure on M96 engine can destroy the engine with zero warning. Proactive replacement: ~$2,500. After failure: $20,000+. NON-NEGOTIABLE inspection.','Check RMS (rear main seal) for oil leaks'],'2005:2012':['IMS reduced but verify VIN range. 997.2 (2009+) lower risk.'],'2012:2026':['9A1 engine: no IMS issue. Very reliable for Porsche.']},
+    BOXSTER:{'1997:2004':['🚨 IMS bearing — same as 911 M96. MUST inspect.'],'2012:2026':['No IMS. Very reliable.']},
+    CAYENNE:{'2003:2010':['Air-oil separator (AOS) failure common','Cooling system hose cracks']},
+  },
+  'LAND ROVER':{
+    _:['🚨 Land Rover ranks among the LOWEST in reliability studies. Budget for significant unexpected repairs.','⚠️ Air suspension failures extremely common — compressor, bags, sensors. Budget $1,500–$5,000.','Electrical failures are endemic to this brand'],
+    'RANGE ROVER':{'2006:2012':['Air suspension compressor failure — test if it raises/lowers properly','Transfer case issues'],'2013:2017':['Continued air suspension and electrical issues'],'2018:2026':['Improved but still below average']},
+  },
+  VOLVO:{
+    _:['Generally safe and solid — better reliability than most European luxury brands','Check for rust on older models'],
+    XC90:{'2003:2014':['ETM (Electronic Throttle Module) failures on early models','Check timing belt service'],'2016:2026':['T5/T6: check for oil leaks and timing components']},
+    S60:{'2011:2018':['Check timing belt/chain service history'],'2019:2026':['Good reliability']},
+    XC60:{'2010:2017':['Generally reliable. Timing belt check if applicable.'],'2018:2026':['Good reliability.']},
+  },
+  JAGUAR:{
+    _:['⚠️ High maintenance costs and below-average reliability documented','Electrical system failures are a known issue','Check air suspension if equipped'],
+    XF:{'2009:2015':['Electrical gremlins common','Check for coolant leaks']},
+  },
+  INFINITI:{
+    _:['Generally reliable Nissan-based vehicles','⚠️ Check CVT if equipped — same Jatco CVT concerns as Nissan'],
+    QX60:{'2013:2020':['⚠️ CVT failure documented — same as Nissan. Test thoroughly.']},
+    G35:{'2003:2007':['VQ35DE — reliable. Check valve cover for oil leaks.']},
+  },
+  ACURA:{'_':['Honda-based — generally very reliable'],'TL':{'2004:2008':['Check automatic transmission — V6 had issues similar to Accord'],'2009:2014':['Generally very reliable']},'MDX':{'2003:2006':['Check transmission'],'2014:2026':['Very reliable.']}},
+  BUICK:{'_':['Generally reliable GM platforms'],'ENCLAVE':{'2008:2012':['Check timing chain noise','Transmission fluid condition'],'2013:2026':['Generally reliable.']}},
+  MITSUBISHI:{'_':['Check CVT reliability on newer models'],'OUTLANDER':{'2014:2021':['CVT shudder check required'],'2022:2026':['Improved.']}},
+};
+
+// ═══════════════════════════════════════════════════
+// GHOST HISTORY PROTOCOL (always included — level 1)
+// ═══════════════════════════════════════════════════
+const GHOST_PROTOCOL = [
+  {id:'gh1',cat:'Ghost Protocol',critical:true,level:1,label:'RUST-BELT CHECK: Is there evidence of oil, lanolin, or undercoating spray on the chassis/underbody? In rust-belt regions (Northeast US, Canada, UK, Nordic countries), NO undercoating = Frame Integrity Risk. Get under the car.'},
+  {id:'gh2',cat:'Ghost Protocol',critical:false,level:1,label:'BOLT TAMPERING: Check for scratched or damaged bolt heads on the engine, transmission, and suspension mounts. Fresh tool marks on old fasteners = someone was inside.'},
+  {id:'gh3',cat:'Ghost Protocol',critical:false,level:1,label:'FLUID ANALYSIS: Check ALL fluids: engine oil (amber/not black), coolant (green/pink, not rusty), brake fluid (clear/pale yellow, not dark), power steering fluid if equipped.'},
+  {id:'gh5',cat:'Ghost Protocol',critical:false,level:1,label:'SERVICE RECORDS: Ask for documentation of timing belt/chain service, transmission fluid changes, and major component replacements. No records = assume maintenance was skipped.'},
+  {id:'gh6',cat:'Ghost Protocol',critical:false,level:1,label:'ODOMETER CONSISTENCY: Check door jamb sticker, owner\'s manual, and any service receipts — does the mileage history make sense? Inconsistent mileage = potential rollback.'},
+];
+
+// ═══════════════════════════════════════════════════
+// UNIVERSAL BASELINE CHECKS (always included)
+// level:1 = visual/static, level:2 = requires test drive
+// ═══════════════════════════════════════════════════
+const UNIVERSAL = [
+  {id:'u1',critical:true,cat:'Legal',level:1,label:'TITLE: Verify it is CLEAN. Reject any Salvage, Rebuilt, Flood, Junk, or Lemon-law buyback title. Ask to see the physical document.'},
+  {id:'u2',critical:true,cat:'Legal',level:1,label:'VIN MATCH: Check VIN on the dashboard (driver side), door jamb sticker, AND the title document. All three must be identical.'},
+  {id:'u3',critical:false,cat:'Cold Start',level:1,label:'COLD START: Start the engine cold (not warmed up). Listen for 2 minutes for ticking, knocking, rattling, or misfires. These often disappear once warm.'},
+  {id:'u4',critical:false,cat:'Engine Oil',level:1,label:'OIL CHECK: Pull the dipstick. Oil should be amber/brown — never black. MILKY or foamy oil = coolant mixing with oil = blown head gasket = very expensive.'},
+  {id:'u5',critical:false,cat:'Engine',level:1,label:'SMOKE TEST: Watch exhaust on cold start for 2 minutes. White smoke = coolant burning (head gasket). Blue/grey smoke = oil burning. Both = major problem.'},
+  {id:'u7',critical:false,cat:'Transmission',level:1,label:'TRANS FLUID: Check if accessible. Should be pink/red, never dark brown or black. Burnt smell = neglect = future failure.'},
+  {id:'u10',critical:false,cat:'Body',level:1,label:'PANEL GAPS: Check gaps between every panel. Uneven gaps or mismatched paint shades = prior accident damage. Check under carpet for rust or repair filler.'},
+  {id:'u11',critical:false,cat:'Undercarriage',level:1,label:'UNDER-BODY INSPECTION: Look under the car at frame rails, subframe, and wheel wells. Active rust (orange/red flaking metal) is a structural danger.'},
+  {id:'u13',critical:false,cat:'Electronics',level:1,label:'ALL ELECTRONICS: Test every window, door lock, headlight, wiper, backup camera, infotainment, and Bluetooth. Note every warning light on the dashboard.'},
+  {id:'u14',critical:false,cat:'Tires',level:1,label:'TIRE WEAR: Check tread depth and wear pattern. Uneven or feathered wear = alignment/suspension problem = extra cost. A new set = $400–$1,200.'},
+  {id:'u6',critical:true,cat:'Transmission',level:2,label:'TRANSMISSION DRIVE TEST: Accelerate from 0 to 50 mph on an empty road. Must be smooth with ZERO hesitation, shudder, slip, jerk, or delay between shifts.'},
+  {id:'u8',critical:false,cat:'Brakes',level:2,label:'BRAKE TEST: During test drive, brake firmly from 40 mph. No vibration, pulling, grinding, or pulsing. Brake pedal should feel firm — not spongy or low.'},
+  {id:'u9',critical:false,cat:'Suspension',level:2,label:'SUSPENSION: Drive over bumps and through turns. No clunking, popping, or excessive body roll. Car should track straight without pulling to one side.'},
+  {id:'u12',critical:false,cat:'Climate',level:2,label:'AC & HEAT: Test AC (should blow cold within 60 seconds) and heat (should be hot within 2 minutes). AC recharge costs $150–$350 if needed.'},
+];
+
+// ═══════════════════════════════════════════════════
+// REPAIR COST ESTIMATOR
+// ═══════════════════════════════════════════════════
+function getRepairCost(label) {
+  const l = label.toLowerCase();
+  if (l.includes('head gasket')) return {label:'Head Gasket',min:1200,max:2800};
+  if (l.includes('timing chain')||l.includes('timing belt')) return {label:'Timing Chain/Belt',min:800,max:2000};
+  if (l.includes('cvt')) return {label:'CVT Replacement',min:3500,max:8000};
+  if (l.includes('transmission')||l.includes('gearbox')) return {label:'Transmission Rebuild/Replace',min:2500,max:8000};
+  if (l.includes('engine')||l.includes('motor')) return {label:'Engine Repair',min:1500,max:8000};
+  if (l.includes('air suspension')) return {label:'Air Suspension',min:800,max:3500};
+  if (l.includes('rust')||l.includes('frame rust')||l.includes('frame integrity')) return {label:'Rust/Frame Repair',min:500,max:5000};
+  if (l.includes('lifter')||l.includes('afm')||l.includes('mds')) return {label:'Lifter/AFM Repair',min:2000,max:5000};
+  if (l.includes('ims')||l.includes('bearing')) return {label:'IMS/Bearing Repair',min:2000,max:6000};
+  if (l.includes('turbo')) return {label:'Turbo Repair',min:1000,max:3500};
+  if (l.includes('brake')) return {label:'Complete Brake Job',min:400,max:1200};
+  if (l.includes('suspension')) return {label:'Suspension Repair',min:500,max:2000};
+  if (l.includes('electrical')) return {label:'Electrical Diagnosis/Repair',min:300,max:1500};
+  return null;
+}
+
+// ═══════════════════════════════════════════════════
+// KB LOOKUP HELPERS
+// ═══════════════════════════════════════════════════
+function getKBIssues(make, model) {
+  const makeKey = Object.keys(KB).find(k => k.toUpperCase() === make.toUpperCase());
+  if (!makeKey) return {issues:[], modelData:null};
+  const makeData = KB[makeKey];
+  const issues = [];
+  if (makeData._) issues.push(...makeData._.map((l,i) => ({id:'kb_g_'+i, cat:'Known Issue', label:l, critical:l.includes('🚨')||l.includes('⚠️')})));
+  const normMod = model.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  const modelKey = Object.keys(makeData).find(k => {
+    if (k === '_') return false;
+    const nk = k.toUpperCase().replace(/[^A-Z0-9]/g,'');
+    return normMod.includes(nk) || nk.includes(normMod) || normMod === nk;
+  });
+  if (!modelKey) return {issues, modelData:null};
+  return {issues, modelData: makeData[modelKey]};
+}
+
+function getYearRangeIssues(modelData, year) {
+  const yr = parseInt(year);
+  for (const range of Object.keys(modelData)) {
+    const [s,e] = range.split(':').map(Number);
+    if (yr >= s && yr <= e) {
+      return modelData[range].map((l,i) => ({id:'kb_m_'+i, cat:'Model-Specific', label:l, critical:l.includes('🚨')||l.includes('⚠️')}));
+    }
+  }
+  return [];
+}
+
+// ═══════════════════════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════════════════════
+const TERM_LINES = [
+  "[CHECKING] CONNECTING TO OFFICIAL SAFETY DATABASES...",
+  "[CHECKING] GOVERNMENT RECALL RECORDS RETRIEVED...",
+  "[CHECKING] SCANNING OWNER COMPLAINT REPORTS...",
+  "[CHECKING] LOADING KNOWN ISSUES FOR THIS MODEL...",
+  "> Pulling Live Market Price Data...",
+  "[CHECKING] CALCULATING FAIR MARKET VALUE...",
+  "> Working Out Repair Cost Estimates...",
+  "[CHECKING] BUILDING YOUR NEGOTIATION STRATEGY...",
+  "> Almost There...",
+  "[CHECKING] PUTTING YOUR REPORT TOGETHER...",
+  "[DONE] ALL CHECKS COMPLETE — REPORT READY ✓"
+];
+
+let S = {
+  phase:'splash', authMode:'login', authSub:'main',
+  user:null, car:{year:'',make:'',model:'',country:'',vin:'',customMake:false},
+  nhtsa:{recalls:[],complaints:[]},
+  globalForensic: null,
+  checklist:[], answers:{}, verdict:null,
+  checkLevel: 1,
+  level3Unlocked: false,
+  termLines:[], authErr:'', authOk:'', authLoading:false,
+  showTokenModal:false, acctSub:'main', acctErr:'', acctOk:'',
+  _pending:null, _resetEmail:null, rememberMe:false,
+  tosAccepted: false
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => encodeURIComponent(s||'');
+
+async function hashPass(p) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('CARZ2025_'+p));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function getUserIP() {
+  try { const r = await fetch('https://api.ipify.org?format=json'); const d = await r.json(); return d.ip; }
+  catch { return 'unknown'; }
+}
+
+async function gasPost(data) {
+  try {
+    const r = await fetch(CFG.GAS_URL, {method:'POST', body:JSON.stringify(data)});
+    return await r.json();
+  } catch(e) { return {ok:false, error:'Network error — check your connection'}; }
+}
+
+async function detectCountry() {
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    const cc = (d.country_code||'').toUpperCase();
+    const map = {US:'USA',GB:'UK',AU:'AUSTRALIA',CA:'CANADA',DE:'GERMANY',JP:'JAPAN',
+                 FR:'FRANCE',IT:'ITALY',ES:'SPAIN',NL:'NETHERLANDS',SE:'SWEDEN',
+                 NO:'NORWAY',ZA:'SOUTH AFRICA',AE:'UAE',SG:'SINGAPORE',NZ:'NEW ZEALAND'};
+    return map[cc] || 'USA';
+  } catch { return 'USA'; }
+}
+
+// ═══════════════════════════════════════════════════
+// FULL-SCREEN TERMINAL OVERLAY
+// ═══════════════════════════════════════════════════
+function showTermOverlay() {
+  const overlay = $('termOverlay');
+  $('termOverlayLines').innerHTML = '';
+  overlay.classList.add('active');
+}
+
+function addTermLine(text, isSuccess) {
+  const box = $('termOverlayLines');
+  if (!box) return;
+  const div = document.createElement('div');
+  div.className = 'term-ov-line';
+  div.style.animationDelay = '0s';
+  div.innerHTML = `<span class="prompt">&gt;&gt;</span> <span class="${isSuccess ? 'term-ov-oracle' : ''}">${text}</span>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function hideTermOverlay() {
+  $('termOverlay').classList.remove('active');
+}
+
+function waitingBtnHTML(msg) {
+  return `<span class="wait-spinner"></span>${msg||'Please wait'}`;
+}
+
+function togglePass(inputId, eyeId) {
+  const inp = $(inputId);
+  const eye = $(eyeId);
+  if (!inp) return;
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    if (eye) eye.textContent = '🙈';
+  } else {
+    inp.type = 'password';
+    if (eye) eye.textContent = '👁️';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// AUTH LOGIC
+// ═══════════════════════════════════════════════════
+function isNewDevice(email) { return !localStorage.getItem('cm_dev_'+btoa(email)); }
+function markDevice(email) { localStorage.setItem('cm_dev_'+btoa(email), '1'); }
+
+async function handleAuth() {
+  const email = ($('authEmail')?.value||'').trim().toLowerCase();
+  const pass  = ($('authPass')?.value||'');
+  S.authErr = ''; S.authOk = '';
+
+  if (!email || !pass) { S.authErr='Please fill in all fields.'; render(); return; }
+  if (S.authMode==='signup' && pass!==($('authPass2')?.value||'')) { S.authErr='Passwords do not match.'; render(); return; }
+  if (pass.length < 6) { S.authErr='Password must be at least 6 characters.'; render(); return; }
+
+  // TOS check on signup
+  if (S.authMode==='signup') {
+    const tosBox = $('tosCheck');
+    if (!tosBox || !tosBox.checked) {
+      S.authErr='You must accept the Terms of Service to create an account.';
+      render(); return;
+    }
+    S.tosAccepted = true;
+  }
+
+  const btn = $('authBtn');
+  if (btn) { btn.disabled=true; btn.innerHTML=`<span class="wait-anim"><span></span><span></span><span></span></span> Please wait...`; }
+  S.authLoading = true;
+  const hash = await hashPass(pass);
+  const ip   = await getUserIP();
+  const res  = await gasPost({action:S.authMode, email, hash, ip, tosAccepted: S.tosAccepted});
+  S.authLoading = false;
+
+  if (!res.ok) { S.authErr = res.error||'Something went wrong. Please try again.'; render(); return; }
+
+  if (S.authMode === 'login') {
+    S._pending = {email, hash, tokens:res.tokens, joined:res.joined||''};
+    const otpRes = await gasPost({action:'sendOTP', email, type:'verify'});
+    if (!otpRes.ok) { S.authErr='Could not send your verification code: '+(otpRes.error||''); render(); return; }
+    S.phase = 'verify2fa'; render();
+    return;
+  }
+
+  S.user = {email, hash, tokens:res.tokens, joined:res.joined||''};
+  localStorage.setItem('cm_user', JSON.stringify(S.user));
+  sessionStorage.setItem('cm_session', '1');
+  markDevice(email);
+  S.phase = 'home'; render();
+}
+
+async function handle2FA() {
+  const otp = ($('otpInput')?.value||'').trim();
+  if (!otp||otp.length!==6) { S.authErr='Enter the 6-digit code.'; render(); return; }
+  S.authLoading = true; render();
+  const res = await gasPost({action:'verifyOTP', email:S._pending.email, otp});
+  S.authLoading = false;
+  if (!res.ok) { S.authErr = res.error||'Invalid code. Please try again.'; render(); return; }
+  S.user = S._pending;
+  if (S.rememberMe) {
+    localStorage.setItem('cm_user', JSON.stringify(S.user));
+  } else {
+    sessionStorage.setItem('cm_user_session', JSON.stringify(S.user));
+    localStorage.removeItem('cm_user');
+  }
+  sessionStorage.setItem('cm_session', '1');
+  S._pending = null;
+  S.phase = 'home'; render();
+}
+
+async function resend2FA() {
+  await gasPost({action:'sendOTP', email:S._pending.email, type:'verify'});
+  S.authErr = ''; S.authOk = 'New code sent to '+S._pending.email;
+  render();
+}
+
+async function handleForgotSend() {
+  const email = ($('resetEmail')?.value||'').trim().toLowerCase();
+  if (!email) { S.authErr='Enter your email.'; render(); return; }
+  S.authLoading=true; render();
+  const res = await gasPost({action:'requestReset', email});
+  S.authLoading=false;
+  if (!res.ok) { S.authErr=res.error||'Failed to send reset code.'; render(); return; }
+  S._resetEmail = email;
+  S.authSub = 'resetOTP'; S.authErr=''; render();
+}
+
+async function handleResetPass() {
+  const otp = ($('resetOTP')?.value||'').trim();
+  const p1  = $('resetPass1')?.value||'';
+  const p2  = $('resetPass2')?.value||'';
+  S.authErr='';
+  if (!otp||otp.length!==6) { S.authErr='Enter the 6-digit code.'; render(); return; }
+  if (!p1||p1.length<6) { S.authErr='Password must be 6+ characters.'; render(); return; }
+  if (p1!==p2) { S.authErr='Passwords do not match.'; render(); return; }
+  S.authLoading=true; render();
+  const newHash = await hashPass(p1);
+  const res = await gasPost({action:'resetPassword', email:S._resetEmail, otp, newHash});
+  S.authLoading=false;
+  if (!res.ok) { S.authErr=res.error||'Reset failed.'; render(); return; }
+  S._resetEmail=null; S.authSub='main'; S.authMode='login';
+  S.authOk='Password reset! Please sign in.'; render();
+}
+
+function logout() {
+  localStorage.removeItem('cm_user');
+  sessionStorage.removeItem('cm_user_session');
+  sessionStorage.removeItem('cm_session');
+  S.user=null; S.phase='auth'; S.authMode='login'; S.authSub='main'; S.rememberMe=false; render();
+}
+
+// ═══════════════════════════════════════════════════
+// ACCOUNT MANAGEMENT
+// ═══════════════════════════════════════════════════
+async function handleChangePass() {
+  const old = $('chgOld')?.value||'';
+  const p1  = $('chgNew1')?.value||'';
+  const p2  = $('chgNew2')?.value||'';
+  S.acctErr=''; S.acctOk='';
+  if (!old||!p1||!p2) { S.acctErr='Fill in all fields.'; render(); return; }
+  if (p1.length<6) { S.acctErr='New password must be 6+ characters.'; render(); return; }
+  if (p1!==p2) { S.acctErr='Passwords do not match.'; render(); return; }
+  S.authLoading=true; render();
+  const oldHash = await hashPass(old);
+  const newHash = await hashPass(p1);
+  const res = await gasPost({action:'changePassword', email:S.user.email, oldHash, newHash});
+  S.authLoading=false;
+  if (!res.ok) { S.acctErr=res.error||'Failed.'; render(); return; }
+  S.user.hash=newHash; localStorage.setItem('cm_user',JSON.stringify(S.user));
+  S.acctOk='Password changed successfully!'; S.acctSub='main'; render();
+}
+
+async function handleDeleteAccount() {
+  if (!confirm('Delete your account? This is PERMANENT and cannot be undone.')) return;
+  const res = await gasPost({action:'deleteAccount', email:S.user.email, hash:S.user.hash});
+  if (!res.ok) { S.acctErr=res.error||'Failed.'; render(); return; }
+  logout();
+}
+
+async function refreshTokens() {
+  const res = await gasPost({action:'getTokens', email:S.user.email, hash:S.user.hash});
+  if (res.ok) { S.user.tokens=res.tokens; localStorage.setItem('cm_user',JSON.stringify(S.user)); render(); }
+}
+
+function resetDevices() {
+  localStorage.removeItem('cm_dev_'+btoa(S.user.email));
+  S.acctOk = 'All devices signed out. Your next login will require email verification.';
+  render();
+}
+
+// ═══════════════════════════════════════════════════
+// CORE ANALYSIS LOGIC
+// ═══════════════════════════════════════════════════
+async function startAnalysis() {
+  if (!S.car.year||!S.car.make||!S.car.model) { alert('Please fill in all vehicle fields.'); return; }
+  if (S.user.tokens<=0) { S.showTokenModal=true; render(); return; }
+
+  S.phase='loading'; S.termLines=['[CHECKING] STARTING YOUR CAR CHECK...']; S.answers={};
+  S.globalForensic = null; S.checkLevel = 1; S.level3Unlocked = false;
+  render();
+
+  showTermOverlay();
+  addTermLine('[CHECKING] CONNECTING TO OFFICIAL SAFETY DATABASES...');
+
+  const fetchTimeout = (url, ms=8000) => {
+    const ctl = new AbortController();
+    const id  = setTimeout(()=>ctl.abort(), ms);
+    return fetch(url,{signal:ctl.signal}).finally(()=>clearTimeout(id));
+  };
+
+  try {
+    const deductRes = await gasPost({action:'deduct', email:S.user.email, hash:S.user.hash});
+    if (!deductRes.ok) { clearInterval(termTimer); S.showTokenModal=true; S.phase='home'; render(); return; }
+    S.user.tokens = deductRes.tokens; localStorage.setItem('cm_user',JSON.stringify(S.user));
+
+    // LAYER 1: NHTSA official data
+    const [recallRes, compRes] = await Promise.all([
+      fetchTimeout(`https://api.nhtsa.gov/recalls/recallsByVehicle?make=${esc(S.car.make)}&model=${esc(S.car.model)}&modelYear=${S.car.year}`)
+        .then(r=>r.json()).catch(()=>({Results:[]})),
+      fetchTimeout(`https://api.nhtsa.gov/complaints/complaintsByVehicle?make=${esc(S.car.make)}&model=${esc(S.car.model)}&modelYear=${S.car.year}`)
+        .then(r=>r.json()).catch(()=>({results:[]}))
+    ]);
+
+    S.nhtsa.recalls    = recallRes.Results || recallRes.results || [];
+    addTermLine('[CHECKING] GOVERNMENT RECALL RECORDS RETRIEVED — ' + S.nhtsa.recalls.length + ' found');
+    addTermLine('[CHECKING] SCANNING ' + S.nhtsa.complaints.length + ' OWNER COMPLAINT REPORTS...');
+    S.nhtsa.complaints = compRes.results || [];
+
+    // VIN decode if provided
+    if (S.car.vin && S.car.vin.length >= 10) {
+      fetchTimeout(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${esc(S.car.vin)}?format=json`, 6000)
+        .then(r=>r.json()).then(vd=>{
+          if (vd && vd.Results) S.vinData = vd.Results;
+        }).catch(()=>{});
+    }
+
+    // GLOBAL FORENSIC via GAS backend
+    const forensicRes = await gasPost({
+      action:'globalForensicAnalysis',
+      year: S.car.year,
+      make: S.car.make,
+      model: S.car.model,
+      country: S.car.country || 'USA',
+      region: S.car.country || 'USA',
+      vin: S.car.vin || ''
+    });
+    if (forensicRes.ok) {
+      S.globalForensic = forensicRes;
+      addTermLine('[CHECKING] LIVE MARKET PRICE DATA RETRIEVED...');
+      addTermLine('[CHECKING] BUILDING YOUR PERSONALISED CHECKLIST...');
+    } else {
+      addTermLine('[INFO] BACKEND SLOW — USING OFFICIAL DATABASE + KNOWLEDGE BASE...');
+    }
+
+    buildChecklist();
+    addTermLine('[DONE] ALL CHECKS COMPLETE — YOUR REPORT IS READY ✓', true);
+
+    setTimeout(()=>{
+      hideTermOverlay();
+      S.phase='checklist';
+      render();
+    }, 900);
+
+  } catch(err) {
+    addTermLine('[INFO] CONNECTION SLOW — USING BUILT-IN KNOWLEDGE DATA...');
+    buildChecklist();
+    setTimeout(()=>{ hideTermOverlay(); S.phase='checklist'; render(); }, 1500);
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// DYNAMIC CHECKLIST BUILDER
+// Uses backend dynamic checklist when available.
+// Falls back to KB + complaint data if not.
+// ═══════════════════════════════════════════════════
+function buildChecklist() {
+  const gf = S.globalForensic;
+  const dynCL = gf && gf.dynamicChecklist;
+  const backendL1 = dynCL && dynCL.level1 && dynCL.level1.length > 0 ? dynCL.level1 : null;
+  const backendL2 = dynCL && dynCL.level2 && dynCL.level2.length > 0 ? dynCL.level2 : null;
+
+  let l1items = [];
+  let l2items = [];
+
+  if (backendL1) {
+    // ── PRIMARY PATH: use the backend dynamic checklist ────────
+    // The backend already analysed recalls, complaints, live search
+    // signals and vehicle profile — trust it fully.
+    backendL1.forEach((item, i) => {
+      l1items.push({
+        id: item.id || 'bl1_'+i,
+        critical: item.priority === 'critical',
+        cat: item.priority === 'critical' ? 'CRITICAL' : 'Check',
+        level: 1,
+        label: `${item.icon ? item.icon + ' ' : ''}${item.title}: ${item.detail}`,
+        badge: item.priority === 'critical' ? 'Critical — Do Not Skip' : null,
+        icon: item.icon,
+        title: item.title,
+        detail: item.detail,
+        priority: item.priority
+      });
+    });
+    if (backendL2) {
+      backendL2.forEach((item, i) => {
+        l2items.push({
+          id: item.id || 'bl2_'+i,
+          critical: item.priority === 'critical',
+          cat: item.priority === 'critical' ? 'CRITICAL' : 'Test Drive',
+          level: 2,
+          label: `${item.icon ? item.icon + ' ' : ''}${item.title}: ${item.detail}`,
+          badge: item.priority === 'critical' ? 'Critical — Do Not Skip' : null,
+          icon: item.icon,
+          title: item.title,
+          detail: item.detail,
+          priority: item.priority
+        });
+      });
+    }
+
+    // Inject any live recall checks from NHTSA at the very top (frontend also fetches these)
+    const recallItems = [];
+    if (S.nhtsa.recalls.length > 0) {
+      S.nhtsa.recalls.slice(0, 3).forEach((rec, i) => {
+        const id = 'recall_front_'+i;
+        // Only add if backend didn't already include a recall check
+        if (!l1items.some(x => x.id === 'recall-status')) {
+          recallItems.push({
+            id, critical: true, cat: 'Federal Recall ⚠️', level: 1,
+            badge: `${S.nhtsa.recalls.length} active government recall${S.nhtsa.recalls.length>1?'s':''}`,
+            label: `⚠️ FEDERAL RECALL${i>0?' #'+(i+1):''}: ${rec.Component||'Safety component'} — ${(rec.Summary||'Confirm recall was completed at zero cost').substring(0,130)}`,
+            isActiveRecall: true, priority: 'critical'
+          });
+        }
+      });
+    }
+    l1items = [...recallItems, ...l1items];
+
+  } else {
+    // ── FALLBACK PATH: backend unavailable — use KB + NHTSA ───
+    l1items = UNIVERSAL.filter(i=>i.level===1).map(i=>({...i}));
+    l2items = UNIVERSAL.filter(i=>i.level===2).map(i=>({...i}));
+
+    if (S.nhtsa.recalls.length>0) {
+      const recallInserts = S.nhtsa.recalls.slice(0,3).map((rec,i)=>({
+        id:'recall_'+i, critical:true, cat:'Federal Recall ⚠️', level:1,
+        badge:`${S.nhtsa.recalls.length} active government recall${S.nhtsa.recalls.length>1?'s':''}`,
+        label:`FEDERAL RECALL${i>0?' #'+(i+1):''}: ${rec.Component||'Safety issue'} — ${(rec.Summary||'Confirm recall completed').substring(0,120)}`,
+        isActiveRecall:true
+      }));
+      l1items.splice(2,0,...recallInserts);
+    }
+
+    const compCats = {};
+    (S.nhtsa.complaints||[]).forEach(c=>{
+      const comp=(c.components||'').toLowerCase();
+      if(comp.includes('engine')||comp.includes('fuel'))compCats.engine=true;
+      if(comp.includes('transmission')||comp.includes('driveline'))compCats.trans=true;
+      if(comp.includes('steering'))compCats.steer=true;
+      if(comp.includes('suspension'))compCats.susp=true;
+      if(comp.includes('airbag')||comp.includes('srs'))compCats.airbag=true;
+    });
+    const compCount=S.nhtsa.complaints.length;
+    if(compCount>3&&compCats.engine)l1items.push({id:'nhtsa_eng',critical:true,cat:'NHTSA Complaints',level:1,badge:`${compCount}+ owner reports`,label:`ENGINE ALERT: Multiple owner complaints about engine/fuel issues on this ${S.car.year} ${S.car.make} ${S.car.model}. Inspect carefully — check oil, listen for knocking, watch for smoke.`});
+    if(compCount>3&&compCats.trans)l2items.push({id:'nhtsa_tr',critical:true,cat:'NHTSA Complaints',level:2,badge:'Multiple owner reports',label:`TRANSMISSION ALERT: Multiple federal complaints about transmission on this model. Test all gears — any hesitation, jerk, or shudder = walk away.`});
+    if(compCats.steer)l2items.push({id:'nhtsa_st',critical:false,cat:'NHTSA Complaints',level:2,label:`STEERING: Owner complaints on file. Test drive: check for pulling to one side, vibration, or loose feel.`});
+    if(compCats.airbag)l1items.push({id:'nhtsa_ab',critical:true,cat:'NHTSA Complaints',level:1,badge:'Safety critical',label:`AIRBAG / SRS: Complaints reported for this model. Check the SRS warning light is OFF and ask for recall documentation.`});
+    if(compCats.susp)l2items.push({id:'nhtsa_su',critical:false,cat:'NHTSA Complaints',level:2,label:`SUSPENSION: Complaints on file. Drive over bumps slowly — listen for clunks or rattles.`});
+
+    const kbResult=getKBIssues(S.car.make,S.car.model);
+    if(kbResult&&kbResult.issues&&kbResult.issues.length>0){
+      kbResult.issues.forEach((item,i)=>{
+        const lvl=item.label.toLowerCase().includes('test drive')||item.label.toLowerCase().includes('accelerat')||item.label.toLowerCase().includes('during')?2:1;
+        (lvl===2?l2items:l1items).push({id:'kbg'+i,critical:item.critical,cat:'Make-Known Issue',level:lvl,label:item.label,badge:item.critical?'Known Issue':null});
+      });
+    }
+    if(kbResult&&kbResult.modelData){
+      const yearIssues=getYearRangeIssues(kbResult.modelData,S.car.year);
+      yearIssues.forEach((item,i)=>{
+        const lvl=item.label.toLowerCase().includes('test drive')||item.label.toLowerCase().includes('accelerat')||item.label.toLowerCase().includes('shudder')||item.label.toLowerCase().includes('during')?2:1;
+        (lvl===2?l2items:l1items).push({id:'kbm'+i,critical:item.critical,cat:'Model+Year Specific',level:lvl,label:item.label,badge:item.critical?'Verified Issue':null});
+      });
+    }
+    l1items.push(...GHOST_PROTOCOL.map(g=>({...g})));
+  }
+
+  // Combine
+ // Pull Level 3 from backend if available
+  const backendL3 = dynCL && dynCL.level3 && dynCL.level3.length > 0 ? dynCL.level3 : null;
+  let l3items = [];
+  if (backendL3) {
+    backendL3.forEach((item, i) => {
+      l3items.push({
+        id: item.id || 'bl3_'+i,
+        critical: item.priority === 'critical',
+        cat: item.priority === 'critical' ? 'CRITICAL' : 'Advanced Check',
+        level: 3,
+        label: `${item.icon ? item.icon + ' ' : ''}${item.title}: ${item.detail}`,
+        badge: item.priority === 'critical' ? 'Critical — Do Not Skip' : null,
+        icon: item.icon,
+        title: item.title,
+        detail: item.detail,
+        priority: item.priority
+      });
+    });
+  } else {
+    // Fallback Level 3 checks (test drive + deep checks)
+    l3items = [
+      {id:'l3_coldstart', critical:true, cat:'Test Drive', level:3, label:'🚗 Cold Start Behaviour: Start the engine from stone cold. It should fire immediately and idle smoothly. Any rough idle, smoke, or hesitation = red flag.'},
+      {id:'l3_accel', critical:true, cat:'Test Drive', level:3, label:'⚡ Acceleration Test: Accelerate firmly from 0–60. The response should be smooth and linear. Any hesitation, stumble, surge, or loss of power = investigate further.'},
+      {id:'l3_braking', critical:true, cat:'Test Drive', level:3, label:'🛑 Braking Test: At safe speed, apply firm brakes. Car must stop straight with no pulling, no grinding, and no pulsing. Any deviation = brake or suspension issue.'},
+      {id:'l3_steering', critical:false, cat:'Test Drive', level:3, label:'🔄 Steering Feel: Drive at low speed. The wheel should feel centred, no vibration, no pulling to one side. Loose or dead steering feel = alignment or rack issue.'},
+      {id:'l3_highway', critical:true, cat:'Test Drive', level:3, label:'🛣️ Highway Speed Stability: Reach motorway speed (80–100 km/h). The car should track straight with no shimmy or vibration. Vibration at speed = wheel balance or suspension.'},
+      {id:'l3_transmission', critical:true, cat:'Test Drive', level:3, label:'⚙️ Transmission All Gears: Drive in all gears (or D, S, L if automatic). All shifts must be clean and smooth. Any clunk, slip, shudder, or delay between gears = serious fault.'},
+      {id:'l3_suspension', critical:false, cat:'Test Drive', level:3, label:'🛞 Suspension — Speed Bump Test: Drive over a speed bump slowly. Listen for clunks, rattles, or creaks. These suggest worn shocks, bushings, or ball joints.'},
+      {id:'l3_warninglights', critical:true, cat:'Test Drive', level:3, label:'⚠️ Warning Lights During Drive: Watch for any warning lights that appear during the drive and do not go off after starting. Photograph any light and look it up immediately.'},
+      {id:'l3_obd', critical:false, cat:'Test Drive', level:3, label:'🔌 OBD-II Scan (Recommended): If you have an OBD reader, plug it in before returning the car. Any pending or stored codes — even cleared ones — reveal hidden faults the seller may have hidden.'},
+      {id:'l3_aircon', critical:false, cat:'Test Drive', level:3, label:'❄️ Air Conditioning & Heating: Test the air conditioning on full cold and full hot. Both should respond within 60 seconds. Warm air only = low gas or failing compressor.'},
+      {id:'l3_electrical', critical:false, cat:'Test Drive', level:3, label:'💡 Electrical Systems: During the drive, test all switches — windows, mirrors, wipers, infotainment, Bluetooth, USB ports. Any dead control = a repair bill.'}
+    ];
+  }
+
+  S.checklist = [
+    ...l1items.map((item,i)=>({level:1,...item,id:item.id||'l1_'+i})),
+    ...l2items.map((item,i)=>({level:2,...item,id:item.id||'l2_'+i})),
+    ...l3items.map((item,i)=>({level:3,...item,id:item.id||'l3_'+i}))
+  ];
+}
+// ═══════════════════════════════════════════════════
+// RELIABILITY VERDICT BUILDER
+// Generates the "Is this car reliable?" banner
+// ═══════════════════════════════════════════════════
+function buildReliabilityBanner() {
+  const gf = S.globalForensic;
+  const layer1 = gf && gf.layer1;
+  const layer2 = gf && gf.layer2;
+  const recallCount = S.nhtsa.recalls.length || (layer1 && layer1.recalls ? layer1.recalls.length : 0);
+  const complaintCount = S.nhtsa.complaints.length || (layer1 && layer1.complaints ? layer1.complaints.length : 0);
+  const failures = (layer2 && layer2.failures) || [];
+  const reliabilityKws = (layer2 && layer2.reliabilityKeywords) || [];
+  const dbName = (layer1 && layer1.dbName) || (S.car.country==='USA'?'NHTSA':'Official Safety Database');
+  const dynCL = gf && gf.dynamicChecklist;
+  const profileFlags = dynCL && dynCL.vehicleProfile ? dynCL.vehicleProfile : {};
+
+  // Score reliability: start at 100, deduct for signals
+  let reliScore = 100;
+  let redFlags = [];
+  let greenFlags = [];
+  let warningFlags = [];
+
+  if (recallCount >= 3) { reliScore -= 30; redFlags.push(`${recallCount} active government recalls`); }
+  else if (recallCount > 0) { reliScore -= 15; warningFlags.push(`${recallCount} recall${recallCount>1?'s':''} on record`); }
+
+  if (complaintCount > 100) { reliScore -= 25; redFlags.push(`${complaintCount}+ owner complaints filed`); }
+  else if (complaintCount > 30) { reliScore -= 12; warningFlags.push(`${complaintCount} owner complaints filed`); }
+  else if (complaintCount > 5) { reliScore -= 5; warningFlags.push(`${complaintCount} complaints filed`); }
+
+  const criticalIssues = ['cvt failure','transmission failure','head gasket','engine failure','oil consumption','frame rust','lifter'];
+  let critHits = 0;
+  failures.concat(reliabilityKws).forEach(f=>{
+    if(criticalIssues.some(c=>f.indexOf(c)>-1)) critHits++;
+  });
+  if(critHits >= 3) { reliScore -= 30; redFlags.push(`${critHits} documented mechanical failure patterns found`); }
+  else if(critHits >= 1) { reliScore -= 12; warningFlags.push(`${critHits} documented issue pattern${critHits>1?'s':''} found online`); }
+
+  // KB-based reliability notes
+  const kbResult = getKBIssues(S.car.make, S.car.model);
+  let kbSummary = null;
+  if (kbResult && kbResult.modelData) {
+    const yearIssues = getYearRangeIssues(kbResult.modelData, S.car.year);
+    const hasCritical = yearIssues.some(i=>i.critical);
+    if (hasCritical) { reliScore -= 20; redFlags.push('Known critical issues for this year/model'); }
+    else if (yearIssues.length > 0) { reliScore -= 5; warningFlags.push('Some known issues for this year'); }
+    else { greenFlags.push('No critical known issues for this year'); }
+  }
+
+  if (reliScore < 0) reliScore = 0;
+  const isReliable = reliScore >= 65 && redFlags.length === 0;
+  const isCaution  = reliScore >= 40 && redFlags.length <= 1;
+
+  let verdict, verdictColor, verdictBg, verdictIcon;
+  if (isReliable) {
+    verdict = 'Generally Reliable';
+    verdictColor = 'var(--green)';
+    verdictBg = 'rgba(34,197,94,0.08)';
+    verdictIcon = '✅';
+    if (greenFlags.length === 0) greenFlags.push('No major known issues found in database');
+  } else if (isCaution) {
+    verdict = 'Buy With Caution';
+    verdictColor = 'var(--amber)';
+    verdictBg = 'rgba(245,158,11,0.08)';
+    verdictIcon = '⚠️';
+  } else {
+    verdict = 'High Risk — Inspect Carefully';
+    verdictColor = 'var(--red)';
+    verdictBg = 'rgba(239,68,68,0.08)';
+    verdictIcon = '🚨';
+  }
+
+  const source = layer1 && layer1.hasOfficialData ? `Live data from ${dbName}` : (gf ? 'Live search + knowledge base' : 'Knowledge base only');
+  return { verdict, verdictColor, verdictBg, verdictIcon, redFlags, warningFlags, greenFlags, source, recallCount, complaintCount, reliScore };
+}
+
+function calcVerdict() {
+  let allAnswered;
+  if (S.checkLevel === 1) allAnswered = S.checklist.filter(i=>i.level===1);
+  else if (S.checkLevel === 2) allAnswered = S.checklist.filter(i=>i.level===1||i.level===2);
+  else allAnswered = S.checklist;
+  const fails = allAnswered.filter(i=>S.answers[i.id]==='fail').length;
+  const critFails = allAnswered.filter(i=>i.critical&&S.answers[i.id]==='fail').length;
+  const hasActiveRecall = S.nhtsa.recalls.length > 0 || (S.globalForensic?.layer1?.investigations?.length > 0);
+  let score = 100-(fails*12)-(critFails*25); if(score<0)score=0;
+  if (hasActiveRecall && score >= 40) score = Math.min(score, 38);
+  const failedItems = allAnswered.filter(i=>S.answers[i.id]==='fail');
+  S.verdict = {score, buy:score>=78&&critFails===0, neg:score>=45&&critFails<=1, fails, critFails, failedItems, hasActiveRecall, checkLevel:S.checkLevel};
+  S.phase='verdict'; render();
+}
+
+// ═══════════════════════════════════════════════════
+// CHECKLIST ANSWER HANDLER
+// ═══════════════════════════════════════════════════
+function handleCheckAnswer(itemId, val) {
+  S.answers[itemId] = val;
+  const card = document.querySelector(`.check-card[data-id="${itemId}"]`);
+  if (card) {
+    card.classList.remove('pass','fail');
+    if (val) card.classList.add(val);
+    card.querySelectorAll('.check-btn').forEach(b => {
+      b.classList.remove('pass-active','fail-active');
+      if (b.dataset.val === val) b.classList.add(val === 'pass' ? 'pass-active' : 'fail-active');
+    });
+  }
+  const activeItems = S.checkLevel === 1 ? S.checklist.filter(i=>i.level===1) : S.checklist;
+  const done = activeItems.filter(i=>S.answers[i.id]).length;
+  const total = activeItems.length;
+  const pct = Math.round(done/total*100)||0;
+  const ctr = $('checkCounter'); if (ctr) ctr.textContent = `${done}/${total} checked`;
+  const pctEl = $('checkPct'); if (pctEl) pctEl.textContent = `${pct}%`;
+  const fill = $('progressFill'); if (fill) fill.style.width = pct+'%';
+  if (done === total) { render(); }
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER ENGINE
+// ═══════════════════════════════════════════════════
+function render() {
+  const a = $('app');
+  $('fbBubble').style.display = (['splash','auth','verify2fa'].includes(S.phase))?'none':'flex';
+  switch(S.phase) {
+    case 'auth':        a.innerHTML = renderAuth();        break;
+    case 'verify2fa':   a.innerHTML = renderVerify2FA();   break;
+    case 'home':        a.innerHTML = renderHome();        break;
+    case 'input':       a.innerHTML = renderInput();       break;
+    case 'loading':     a.innerHTML = renderLoading();     break;
+    case 'checklist':   a.innerHTML = renderChecklist();   break;
+    case 'level2':      a.innerHTML = renderLevel2();      break;
+    case 'level3':      a.innerHTML = renderLevel3();      break;
+    case 'verdict':     a.innerHTML = renderVerdict();     break;
+    case 'account':     a.innerHTML = renderAccount();     break;
+  }
+  const mo = document.querySelector('.modal-overlay'); if(mo) mo.remove();
+  if(S.showTokenModal) renderTokenModal();
+}
+
+// ═══════════════════════════════════════════════════
+// AUTH SCREEN
+// ═══════════════════════════════════════════════════
+function renderAuth() {
+  if (S.authSub==='forgot' || S.authSub==='resetOTP') return renderForgotPass();
+  return `<div class="fade-up" style="padding:32px 20px 60px">
+    <div style="text-align:center;margin-bottom:30px">
+      <div class="logo-ring" style="margin:0 auto 12px;width:64px;height:64px;font-size:26px">🛡️</div>
+      <div style="font-size:28px;font-weight:900;color:var(--teal);letter-spacing:-1px">DealerDefense</div>
+      <div style="font-size:11px;font-family:var(--fm);color:var(--muted2);letter-spacing:3px;margin-top:4px">BY CARZMOOD</div>
+    </div>
+    <div class="auth-tab">
+      <button class="${S.authMode==='login'?'active':''}" onclick="S.authMode='login';S.authErr='';S.authOk='';S.tosAccepted=false;render()">Sign In</button>
+      <button class="${S.authMode==='signup'?'active':''}" onclick="S.authMode='signup';S.authErr='';S.authOk='';render()">Create Account</button>
+    </div>
+    ${S.authOk?`<div class="ok-box" style="margin-bottom:14px">✓ ${S.authOk}</div>`:''}
+    ${S.authErr?`<div class="err-box" style="margin-bottom:14px">${S.authErr}</div>`:''}
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div><label class="lbl">Email address</label><input id="authEmail" class="inp" type="email" placeholder="you@example.com" autocomplete="email" autocorrect="off" autocapitalize="none"></div>
+      <div>
+        <label class="lbl">Password</label>
+        <div class="pass-wrap">
+          <input id="authPass" class="inp" type="password" placeholder="Your password" autocomplete="${S.authMode==='login'?'current-password':'new-password'}">
+          <button class="pass-eye" id="passEye1" onclick="togglePass('authPass','passEye1')" type="button">👁️</button>
+        </div>
+      </div>
+      ${S.authMode==='signup'?`
+      <div>
+        <label class="lbl">Confirm password</label>
+        <div class="pass-wrap">
+          <input id="authPass2" class="inp" type="password" placeholder="Repeat your password" autocomplete="new-password">
+          <button class="pass-eye" id="passEye2" onclick="togglePass('authPass2','passEye2')" type="button">👁️</button>
+        </div>
+      </div>`:''}
+    </div>
+    ${S.authMode==='login'?`
+    <div style="display:flex;align-items:center;gap:10px;margin-top:16px">
+      <input type="checkbox" id="rememberMe" ${S.rememberMe?'checked':''} onchange="S.rememberMe=this.checked" style="width:17px;height:17px;accent-color:var(--teal);cursor:pointer;flex-shrink:0">
+      <label for="rememberMe" style="font-size:13px;color:var(--text2);cursor:pointer">Remember me on this device</label>
+    </div>`:''}
+    ${S.authMode==='signup'?`
+    <div class="tos-wrap" style="margin-top:16px">
+      <input type="checkbox" id="tosCheck" ${S.tosAccepted?'checked':''} onchange="S.tosAccepted=this.checked">
+      <label for="tosCheck">I have read and agree to the <a href="#" onclick="showTOS();return false;">Terms of Service</a> and <a href="#" onclick="showPrivacy();return false;">Privacy Policy</a>. I understand this tool provides data-driven guidance and is not a substitute for a professional mechanical inspection.</label>
+    </div>`:''}
+    <button class="btn btn-primary" style="margin-top:16px" id="authBtn" onclick="handleAuth()" ${S.authLoading?'disabled':''}>
+      ${S.authLoading?`<span class="wait-anim"><span></span><span></span><span></span></span> Please wait...`:S.authMode==='login'?'Sign In →':'Create Account →'}
+    </button>
+    ${S.authMode==='login'?`<div style="text-align:center;margin-top:16px"><button onclick="S.authSub='forgot';S.authErr='';S.authOk='';render()" style="background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;text-decoration:underline">Forgot your password?</button></div>`:''}
+    ${S.authMode==='signup'?`<div style="font-size:12px;color:var(--muted2);text-align:center;margin-top:14px;line-height:1.7">Your IP address is recorded to prevent misuse. One account per person for best experience.</div>`:''}
+  </div>`;
+}
+
+function renderForgotPass() {
+  if (S.authSub==='resetOTP') return renderResetOTP();
+  return `<div class="fade-up" style="padding:32px 20px">
+    <button class="back-btn" style="margin-bottom:20px" onclick="S.authSub='main';S.authErr='';render()">← Back to Sign In</button>
+    <div style="font-size:24px;font-weight:800;margin-bottom:8px">🔑 Reset Password</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:24px">Enter your email and we'll send you a 6-digit reset code.</div>
+    ${S.authErr?`<div class="err-box" style="margin-bottom:14px">${S.authErr}</div>`:''}
+    <label class="lbl">Your email address</label>
+    <input id="resetEmail" class="inp" type="email" placeholder="you@example.com" style="margin-bottom:16px">
+    <button class="btn btn-primary" onclick="handleForgotSend()" ${S.authLoading?'disabled':''}>
+      ${S.authLoading?`<span class="wait-anim"><span></span><span></span><span></span></span> Sending...`:'Send Reset Code →'}
+    </button>
+  </div>`;
+}
+
+function renderResetOTP() {
+  return `<div class="fade-up" style="padding:32px 20px">
+    <button class="back-btn" style="margin-bottom:20px" onclick="S.authSub='forgot';S.authErr='';render()">← Back</button>
+    <div style="font-size:24px;font-weight:800;margin-bottom:8px">📨 Check Your Email</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:6px">A 6-digit code was sent to:</div>
+    <div style="font-size:15px;font-weight:700;color:var(--teal);font-family:var(--fm);margin-bottom:24px">${S._resetEmail||''}</div>
+    ${S.authErr?`<div class="err-box" style="margin-bottom:14px">${S.authErr}</div>`:''}
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div><label class="lbl">Reset code (6 digits)</label><input id="resetOTP" class="inp" type="number" placeholder="123456" maxlength="6" style="font-family:var(--fm);font-size:22px;letter-spacing:4px;text-align:center"></div>
+      <div>
+        <label class="lbl">New password</label>
+        <div class="pass-wrap"><input id="resetPass1" class="inp" type="password" placeholder="New password (6+ chars)"><button class="pass-eye" id="rpe1" onclick="togglePass('resetPass1','rpe1')" type="button">👁️</button></div>
+      </div>
+      <div>
+        <label class="lbl">Confirm new password</label>
+        <div class="pass-wrap"><input id="resetPass2" class="inp" type="password" placeholder="Repeat new password"><button class="pass-eye" id="rpe2" onclick="togglePass('resetPass2','rpe2')" type="button">👁️</button></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="handleResetPass()" ${S.authLoading?'disabled':''}>
+      ${S.authLoading?`<span class="wait-anim"><span></span><span></span><span></span></span> Resetting...`:'Reset Password →'}
+    </button>
+  </div>`;
+}
+
+function renderVerify2FA() {
+  return `<div class="fade-up" style="padding:32px 20px">
+    <div style="text-align:center;margin-bottom:28px">
+      <div style="font-size:48px;margin-bottom:12px">🔐</div>
+      <div style="font-size:22px;font-weight:800;margin-bottom:8px">Verify It's You</div>
+      <div style="font-size:14px;color:var(--text2);line-height:1.7">A 6-digit security code was sent to your email. Enter it below to sign in.</div>
+      <div style="font-size:13px;font-family:var(--fm);color:var(--teal);margin-top:10px">${S._pending?.email||''}</div>
+    </div>
+    ${S.authErr?`<div class="err-box" style="margin-bottom:14px">${S.authErr}</div>`:''}
+    ${S.authOk?`<div class="ok-box" style="margin-bottom:14px">${S.authOk}</div>`:''}
+    <label class="lbl">6-digit verification code</label>
+    <input id="otpInput" class="inp" type="number" placeholder="000000" maxlength="6" style="font-family:var(--fm);font-size:28px;letter-spacing:6px;text-align:center;margin-bottom:16px">
+    <button class="btn btn-primary" onclick="handle2FA()" ${S.authLoading?'disabled':''}>
+      ${S.authLoading?`<span class="wait-anim"><span></span><span></span><span></span></span> Verifying...`:'Verify & Sign In →'}
+    </button>
+    <div style="text-align:center;margin-top:16px">
+      <button onclick="resend2FA()" style="background:none;border:none;color:var(--muted2);font-size:13px;cursor:pointer;text-decoration:underline">Didn't receive it? Resend code</button>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <button onclick="S.phase='auth';S.authMode='login';S.authSub='main';S._pending=null;S.authErr='';render()" style="background:none;border:none;color:var(--muted2);font-size:12px;cursor:pointer">← Back to Sign In</button>
+    </div>
+    <div style="margin-top:20px;background:var(--teal-glow2);border:1px solid rgba(45,212,191,0.2);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--text2);text-align:center">
+      🛡️ This code expires in 15 minutes. Check your spam folder if you don't see it.
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// HOME SCREEN
+// ═══════════════════════════════════════════════════
+function renderHome() {
+  return `<div style="padding-bottom:80px">
+    <div id="topBar">
+      <div style="font-size:15px;font-weight:800;color:var(--teal);letter-spacing:-0.3px">🛡️ DealerDefense</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="token-badge" onclick="S.showTokenModal=true;render()">🎯 ${S.user.tokens} tokens</div>
+        <button onclick="S.phase='account';S.acctSub='main';S.acctErr='';S.acctOk='';render()" style="background:none;border:none;color:var(--muted2);font-size:22px;cursor:pointer" title="Account">⚙️</button>
+      </div>
+    </div>
+    <div class="fade-up" style="padding:24px 20px 0">
+      <h1 style="font-size:28px;font-weight:900;line-height:1.2;margin-bottom:10px;letter-spacing:-0.5px">Know exactly what<br>a car is worth<br>before you pay.</h1>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:22px">We check official government safety databases, look up live market prices, and give you a clear verdict — so you never overpay or buy a bad car.</p>
+      <button class="btn btn-primary" style="font-size:18px;padding:22px;margin-bottom:22px" onclick="S.phase='input';render()">🔍 CHECK THIS CAR (1 TOKEN)</button>
+      <div class="card" style="border-color:rgba(45,212,191,0.2);margin-bottom:20px">
+        <div style="font-size:13px;color:var(--text2);line-height:1.7">
+          🎯 You have <strong style="color:var(--teal)">${S.user.tokens} token${S.user.tokens!==1?'s':''}</strong> left.<br>
+          ${S.user.tokens===0?`<button onclick="S.showTokenModal=true;render()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:13px;text-decoration:underline;font-family:var(--fh)">Get more tokens to keep checking cars →</button>`:'Each car check uses 1 token.'}
+        </div>
+      </div>
+      <button onclick="showInstallModal()" style="width:100%;margin-bottom:14px;padding:14px;background:transparent;border:1px dashed rgba(45,212,191,0.35);border-radius:var(--r);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--teal);font-size:13px;font-weight:700;font-family:var(--fh)">
+        📲 Add to Your Home Screen
+      </button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// INPUT SCREEN
+// ═══════════════════════════════════════════════════
+function renderInput() {
+  if (!S.car.country) {
+    detectCountry().then(cc => { S.car.country = cc; });
+    S.car.country = 'USA';
+  }
+
+  setTimeout(()=>{
+    const checkReady=()=>{
+      const y=$('selYear')?.value;
+      const makeType = $('makeTypeToggle')?.value;
+      let m = '';
+      if (makeType === 'custom') {
+        m = ($('customMake')?.value||'').trim().toUpperCase();
+      } else {
+        m = $('selMake')?.value||'';
+      }
+      const mod=($('inMod')?.value||'').trim();
+      const country = $('selCountry')?.value || S.car.country;
+      const vin = ($('inVin')?.value||'').trim().toUpperCase();
+      const btn=$('runBtn');
+      if(!btn)return;
+      if(y&&m&&mod){
+        btn.disabled=false;btn.className='btn btn-primary';
+        btn.textContent=`CHECK THIS CAR (1 token)`;
+        S.car={year:y,make:m,model:mod.toUpperCase(),country,vin};
+      } else {
+        btn.disabled=true;btn.className='btn';btn.textContent='Fill in all fields above ↑';
+      }
+    };
+    $('selYear')?.addEventListener('change',checkReady);
+    $('selMake')?.addEventListener('change',checkReady);
+    $('inMod')?.addEventListener('input',checkReady);
+    $('inVin')?.addEventListener('input',checkReady);
+    $('selCountry')?.addEventListener('change',(e)=>{S.car.country=e.target.value;checkReady();});
+    $('makeTypeToggle')?.addEventListener('change',()=>{
+      const ct=$('makeTypeToggle')?.value;
+      const dropWrap=$('makeDropWrap');
+      const customWrap=$('makeCustomWrap');
+      if(ct==='custom'){
+        if(dropWrap)dropWrap.style.display='none';
+        if(customWrap)customWrap.style.display='block';
+      } else {
+        if(dropWrap)dropWrap.style.display='block';
+        if(customWrap)customWrap.style.display='none';
+      }
+      checkReady();
+    });
+    $('customMake')?.addEventListener('input',checkReady);
+  },50);
+
+  const countryOptions = COUNTRIES.map(c=>`<option value="${c.code}" ${c.code===S.car.country?'selected':''}>${c.name}</option>`).join('');
+
+  return `<div>
+    <div id="topBar">
+      <button class="back-btn" onclick="S.phase='home';render()">← Back</button>
+      <div class="token-badge" onclick="S.showTokenModal=true;render()">🎯 ${S.user.tokens} tokens</div>
+    </div>
+    <div style="padding:22px 20px 80px" class="fade-up">
+      <h2 style="font-size:24px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px">Which car do you want to check?</h2>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:22px">Enter the car details below. We check official government records first, then live market data.</p>
+      <div style="display:flex;flex-direction:column;gap:14px">
+
+        <div>
+          <label class="lbl">Your Country / Region</label>
+          <div class="country-select-wrap">
+            <select id="selCountry" class="inp">${countryOptions}</select>
+            <span class="country-select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div><label class="lbl">Model Year</label>
+          <select id="selYear" class="inp"><option value="">Select year...</option>${YEARS.map(y=>`<option value="${y}" ${S.car.year==y?'selected':''}>${y}</option>`).join('')}</select>
+        </div>
+
+        <div>
+          <label class="lbl">Make (Brand)</label>
+          <select id="makeTypeToggle" class="inp" style="margin-bottom:8px">
+            <option value="list">Select from list</option>
+            <option value="custom">Type it in (not in list)</option>
+          </select>
+          <div id="makeDropWrap">
+            <select id="selMake" class="inp"><option value="">Select make...</option>${MAKES.map(m=>`<option value="${m}" ${S.car.make===m?'selected':''}>${m}</option>`).join('')}</select>
+          </div>
+          <div id="makeCustomWrap" style="display:none">
+            <input id="customMake" class="inp" placeholder="e.g. Holden, Skoda, Fiat, Tata..." value="">
+          </div>
+        </div>
+
+        <div><label class="lbl">Model</label><input id="inMod" class="inp" placeholder="e.g. Camry, F-150, Civic, Hilux" value="${S.car.model||''}"></div>
+
+        <div>
+          <label class="lbl">VIN Number <span style="font-size:10px;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none">(optional — improves accuracy)</span></label>
+          <div class="vin-section">
+            <input id="inVin" class="inp" placeholder="e.g. 1HGBH41JXMN109186" value="${S.car.vin||''}" style="background:var(--bg);text-transform:uppercase;font-family:var(--fm);letter-spacing:1px">
+            <div style="font-size:11px;color:var(--muted2);margin-top:8px;line-height:1.6">The VIN is usually on the driver-side dashboard or door jamb. Providing it gives more precise recall and spec data.</div>
+          </div>
+        </div>
+
+      </div>
+      <div style="background:var(--teal-glow2);border:1px solid rgba(45,212,191,0.2);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--text2);margin:18px 0;line-height:1.7">
+        🌍 <strong style="color:var(--teal)">Worldwide Coverage:</strong> USA (NHTSA), UK (DVSA), Australia, Canada, and more — we check your country's official database first, then live market data.
+      </div>
+      <button id="runBtn" class="btn" disabled style="font-size:17px;padding:21px" onclick="startAnalysis()">Fill in all fields above ↑</button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// LOADING SCREEN
+// ═══════════════════════════════════════════════════
+function renderLoading() {
+  return `<div class="fade-in" style="padding:28px 20px;display:flex;flex-direction:column;min-height:100dvh">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:20px;font-weight:900;color:var(--teal);letter-spacing:-0.5px">Checking Your Car Now...</div>
+      <div style="font-size:13px;font-family:var(--fm);color:var(--muted2);margin-top:4px">${S.car.year} ${S.car.make} ${S.car.model} — ${S.car.country||'USA'}</div>
+    </div>
+    <div id="termBox" class="terminal">${buildTermHTML()}</div>
+  </div>`;
+}
+
+function buildTermHTML() {
+  return S.termLines.map((l,i)=>`<div class="term-line"><span class="term-prompt">&gt;&gt;</span><span class="term-text${i===S.termLines.length-1&&(l.includes('complete')||l.includes('COMPLETE'))?' done':''}">${l}${i===S.termLines.length-1?`<span class="term-cursor">█</span>`:''}</span></div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════
+// LEVEL 1 CHECKLIST SCREEN
+// ═══════════════════════════════════════════════════
+function renderChecklist() {
+  const l1items = S.checklist.filter(i => i.level === 1);
+  const l2items = S.checklist.filter(i => i.level === 2);
+  const done = l1items.filter(i => S.answers[i.id]).length;
+  const total = l1items.length;
+  const pct = Math.round(done/total*100)||0;
+  const allDone = done === total && total > 0;
+
+  // Confidence data
+  const gf = S.globalForensic;
+  const dataScore = (S.nhtsa.recalls.length>0||S.nhtsa.complaints.length>0)?'high':gf?'medium':'low';
+  const dataLabel = dataScore==='high'?'High — Official database match':dataScore==='medium'?'Medium — AI-assisted data':'Basic — Built-in knowledge only';
+  const dbName = gf?.layer1?.dbName || (S.car.country==='USA'?'NHTSA (United States)':'Official Safety Database');
+  const timestamp = new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  return `<div class="fade-in">
+    <div id="topBar" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="back-btn" onclick="S.phase='input';S.answers={};S.checkLevel=1;render()">← New Car</button>
+          <button class="back-btn" onclick="S.phase='home';S.answers={};S.checkLevel=1;render()" style="color:var(--teal)">🏠 Home</button>
+        </div>
+        <div>
+          <span id="checkCounter" style="font-size:13px;font-family:var(--fm);color:var(--muted2)">${done}/${total} checked</span>
+          <span id="checkPct" style="font-size:11px;font-family:var(--fm);color:var(--teal);margin-left:8px">${pct}%</span>
+        </div>
+      </div>
+      <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:${pct}%"></div></div>
+    </div>
+
+    <div style="padding:0 20px 100px;margin-top:12px">
+
+      <!-- LEVEL BADGE -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;align-items:center">
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--teal);background:var(--teal-glow);text-align:center">
+          <div style="font-size:10px;font-weight:900;color:var(--teal);font-family:var(--fm)">LEVEL 1</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Model Profile + Walk-Around</div>
+        </div>
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);text-align:center;opacity:0.5">
+          <div style="font-size:10px;font-weight:900;color:var(--muted2);font-family:var(--fm)">LEVEL 2</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Walk-Around Checks</div>
+        </div>
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);text-align:center;opacity:0.5">
+          <div style="font-size:10px;font-weight:900;color:var(--muted2);font-family:var(--fm)">LEVEL 3</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Test Drive Checks</div>
+        </div>
+      </div>
+
+      <!-- DATA SOURCE INFO -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:1px;margin-bottom:3px">DATA SOURCE</div>
+          <div style="font-size:12px;color:var(--text2)">${dbName}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="src-label"><div class="src-dot" style="background:${dataScore==='high'?'var(--green)':dataScore==='medium'?'var(--amber)':'var(--muted)'}"></div>${dataScore.toUpperCase()} CONFIDENCE</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;font-family:var(--fm)">${timestamp}</div>
+        </div>
+      </div>
+
+      <div style="font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6">
+        <strong style="color:var(--teal)">${S.car.year} ${S.car.make} ${S.car.model}</strong> — ${S.car.country||'USA'}
+        ${S.car.vin?`<span style="font-size:11px;font-family:var(--fm);color:var(--muted2);display:block;margin-top:3px">VIN: ${S.car.vin}</span>`:''}<br>
+        <span style="font-size:12px">Answer each question from where you stand — <strong style="color:var(--teal)">no test drive needed yet.</strong></span>
+      </div>
+
+      ${S.nhtsa.recalls.length>0?`
+      <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.35);border-radius:var(--rs);padding:12px;margin-bottom:14px;font-size:12px;font-family:var(--fm);color:var(--red)">
+        ⚠ ${S.nhtsa.recalls.length} ACTIVE GOVERNMENT RECALL${S.nhtsa.recalls.length>1?'S':''} — Car Health Score will be capped below 40%
+      </div>`:''}
+
+      ${l1items.map(i=>{
+        const ans = S.answers[i.id]||'';
+        const isGhost = i.cat==='Ghost Protocol';
+        return `
+        <div class="check-card ${ans} ${isGhost?'ghost-card':''}" data-id="${i.id}" ${isGhost?'style="background:linear-gradient(135deg,rgba(99,77,158,0.1),rgba(99,77,158,0.04));border-color:rgba(139,92,246,0.25)"':''}>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px">
+            <span class="tag ${i.critical?'tag-red':isGhost?'tag-amber':'tag-teal'}" style="flex-shrink:0;margin-top:2px">${i.critical?'CRITICAL':i.cat}</span>
+          </div>
+          ${i.badge&&i.badge!=='null'?`<div style="font-size:11px;font-family:var(--fm);color:var(--amber);font-weight:700;margin-bottom:8px">⚠ ${i.badge}</div>`:''}
+          <div style="font-size:13px;line-height:1.65;margin-bottom:14px;color:var(--text)">${i.label}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button class="check-btn ${ans==='pass'?'pass-active':''}" data-val="pass" onclick="handleCheckAnswer('${i.id}','pass')">✓ Pass</button>
+            <button class="check-btn ${ans==='fail'?'fail-active':''}" data-val="fail" onclick="handleCheckAnswer('${i.id}','fail')">✗ Fail</button>
+          </div>
+        </div>`;
+      }).join('')}
+
+      ${allDone ? `
+      <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.3);border-radius:var(--r);padding:16px;margin-bottom:14px;text-align:center">
+        <div style="font-size:20px;margin-bottom:8px">✅</div>
+        <div style="font-size:15px;font-weight:900;color:var(--green);margin-bottom:6px">Level 1 Complete!</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">You finished the model profile checks. Now do the <strong style="color:var(--amber)">Level 2 Walk-Around</strong> checks — or skip straight to the report.</div>
+        <button class="btn btn-primary" style="margin-bottom:10px;padding:16px;font-size:15px;background:var(--amber);color:#000" onclick="goToLevel2()">
+          🔍 Do Level 2 Walk-Around Checks
+        </button>
+        <button class="btn btn-ghost" style="padding:14px;font-size:14px" onclick="calcVerdict()">
+          📋 Get My Report Now (Level 1 Only)
+        </button>
+      </div>
+      ` : `
+      <button id="verdictBtn" class="btn" disabled style="padding:21px;margin-top:8px;font-size:17px">
+        Answer all ${total-done} remaining checks to continue
+      </button>
+      `}
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// LEVEL 2 PAGE — Completely separate view
+// ═══════════════════════════════════════════════════
+function goToLevel2() {
+  S.checkLevel = 2;
+  S.phase = 'level2';
+  render();
+}
+function goToLevel3() {
+  S.checkLevel = 3;
+  S.level3Unlocked = true;
+  S.phase = 'level3';
+  render();
+}
+
+function renderLevel2() {
+  const l2items = S.checklist.filter(i => i.level === 2);
+  const done = l2items.filter(i => S.answers[i.id]).length;
+  const total = l2items.length;
+  const pct = Math.round(done/total*100)||0;
+  const allDone = done === total && total > 0;
+
+  return `<div class="fade-in level2-page">
+    <div id="topBar" style="display:block;background:rgba(10,16,28,0.97);border-bottom:1px solid rgba(245,158,11,0.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="back-btn" onclick="S.phase='checklist';S.checkLevel=1;render()">← Level 1 Checks</button>
+        </div>
+        <div>
+          <span id="checkCounter" style="font-size:13px;font-family:var(--fm);color:var(--muted2)">${done}/${total} checked</span>
+          <span id="checkPct" style="font-size:11px;font-family:var(--fm);color:var(--amber);margin-left:8px">${pct}%</span>
+        </div>
+      </div>
+      <div class="progress-bar"><div id="progressFill" style="height:100%;background:linear-gradient(90deg,#d97706,var(--amber));border-radius:4px;transition:width 0.4s ease;width:${pct}%"></div></div>
+    </div>
+
+    <div style="padding:16px 20px 100px">
+
+      <!-- LEVEL 2 HEADER -->
+      <div class="level2-header" style="border-radius:var(--r);margin-bottom:16px;border:1px solid rgba(245,158,11,0.3)">
+        <div style="font-size:11px;font-weight:900;color:var(--amber);font-family:var(--fm);letter-spacing:2px;margin-bottom:4px">🚗 LEVEL 2 — TEST DRIVE CHECKS</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6">These checks require the engine running and a short test drive. Only do these if you're seriously considering the car.</div>
+        <div style="font-size:12px;color:var(--muted2);margin-top:6px">${S.car.year} ${S.car.make} ${S.car.model} · ${total} checks</div>
+      </div>
+
+      <div style="font-size:12px;color:var(--amber);background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:var(--rs);padding:10px 12px;margin-bottom:16px;line-height:1.6">
+        ⚠️ <strong>Safety first:</strong> Only test drive with the seller's permission on a safe, familiar road. Never drive a car that feels unsafe.
+      </div>
+
+      ${l2items.map(i=>{
+        const ans = S.answers[i.id]||'';
+        return `
+        <div class="check-card ${ans}" data-id="${i.id}">
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px">
+            <span class="tag ${i.critical?'tag-red':'tag-amber'}" style="flex-shrink:0;margin-top:2px">${i.critical?'CRITICAL':i.cat}</span>
+          </div>
+          ${i.badge&&i.badge!=='null'?`<div style="font-size:11px;font-family:var(--fm);color:var(--amber);font-weight:700;margin-bottom:8px">⚠ ${i.badge}</div>`:''}
+          <div style="font-size:13px;line-height:1.65;margin-bottom:14px;color:var(--text)">${i.label}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button class="check-btn ${ans==='pass'?'pass-active':''}" data-val="pass" onclick="handleCheckAnswer('${i.id}','pass')">✓ Pass</button>
+            <button class="check-btn ${ans==='fail'?'fail-active':''}" data-val="fail" onclick="handleCheckAnswer('${i.id}','fail')">✗ Fail</button>
+          </div>
+        </div>`;
+      }).join('')}
+
+      ${allDone ? `
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:var(--r);padding:16px;margin-bottom:14px;text-align:center">
+        <div style="font-size:20px;margin-bottom:8px">✅</div>
+        <div style="font-size:15px;font-weight:900;color:var(--amber);margin-bottom:6px">Level 2 Complete!</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px">Great work. If you are seriously considering buying this car, complete the <strong style="color:var(--teal)">Level 3 Test Drive Checks</strong> for a full picture.</div>
+        <button class="btn btn-primary" style="margin-bottom:10px;padding:16px;font-size:15px" onclick="goToLevel3()">
+          🚗 Do Level 3 Test Drive Checks
+        </button>
+        <button class="btn" style="padding:14px;font-size:14px;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.3)" onclick="calcVerdict()">
+          📋 Get Report Now (Without Test Drive)
+        </button>
+      </div>
+      ` : `
+      <button class="btn" disabled style="padding:21px;margin-top:8px;font-size:17px">
+        Answer ${total-done} more checks to get the report
+      </button>
+      `}
+
+      <button class="btn btn-ghost" style="padding:14px;font-size:14px;margin-top:10px" onclick="calcVerdict()">
+        Skip to Report Now
+      </button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// LEVEL 3 PAGE — Test Drive Checks
+// ═══════════════════════════════════════════════════
+function renderLevel3() {
+  const l3items = S.checklist.filter(i => i.level === 3);
+  const done = l3items.filter(i => S.answers[i.id]).length;
+  const total = l3items.length;
+  const pct = Math.round(done/total*100)||0;
+  const allDone = done === total && total > 0;
+
+  return `<div class="fade-in">
+    <div id="topBar" style="display:block;background:rgba(10,16,28,0.97);border-bottom:1px solid rgba(45,212,191,0.25)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="back-btn" onclick="S.phase='level2';S.checkLevel=2;render()">← Level 2 Checks</button>
+        </div>
+        <div>
+          <span id="checkCounter" style="font-size:13px;font-family:var(--fm);color:var(--muted2)">${done}/${total} checked</span>
+          <span id="checkPct" style="font-size:11px;font-family:var(--fm);color:var(--teal);margin-left:8px">${pct}%</span>
+        </div>
+      </div>
+      <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--teal2),var(--teal))"></div></div>
+    </div>
+
+    <div style="padding:0 20px 100px;margin-top:12px">
+      <!-- LEVEL BADGE -->
+      <div style="display:flex;gap:6px;margin-bottom:14px;align-items:center">
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);text-align:center;opacity:0.5">
+          <div style="font-size:10px;font-weight:900;color:var(--muted2);font-family:var(--fm)">LEVEL 1 ✓</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Done</div>
+        </div>
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--card);text-align:center;opacity:0.5">
+          <div style="font-size:10px;font-weight:900;color:var(--muted2);font-family:var(--fm)">LEVEL 2 ✓</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Done</div>
+        </div>
+        <div style="flex:1;padding:9px 6px;border-radius:var(--rs);border:1.5px solid var(--teal);background:var(--teal-glow);text-align:center">
+          <div style="font-size:10px;font-weight:900;color:var(--teal);font-family:var(--fm)">LEVEL 3</div>
+          <div style="font-size:9px;color:var(--muted2);margin-top:2px">Test Drive · ${total} checks</div>
+        </div>
+      </div>
+
+      <div style="background:var(--teal-glow2);border:1px solid rgba(45,212,191,0.2);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.7">
+        🚗 <strong style="color:var(--teal)">Level 3 — Test Drive Checks.</strong> Only do these if the car passed Level 2. Take the car for a real test drive. These checks catch hidden faults that only appear while driving.
+      </div>
+
+      ${l3items.map(i => {
+        const ans = S.answers[i.id]||'';
+        return `
+        <div class="check-card ${ans}" data-id="${i.id}">
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px">
+            <span class="tag ${i.critical?'tag-red':'tag-teal'}" style="flex-shrink:0;margin-top:2px">${i.critical?'CRITICAL':'TEST DRIVE'}</span>
+          </div>
+          ${i.badge&&i.badge!=='null'?`<div style="font-size:11px;font-family:var(--fm);color:var(--amber);font-weight:700;margin-bottom:8px">⚠ ${i.badge}</div>`:''}
+          <div style="font-size:13px;line-height:1.65;margin-bottom:14px;color:var(--text)">${i.label}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button class="check-btn ${ans==='pass'?'pass-active':''}" data-val="pass" onclick="handleCheckAnswer('${i.id}','pass')">✓ Pass</button>
+            <button class="check-btn ${ans==='fail'?'fail-active':''}" data-val="fail" onclick="handleCheckAnswer('${i.id}','fail')">✗ Fail</button>
+          </div>
+        </div>`;
+      }).join('')}
+
+      ${allDone ? `
+      <button class="btn btn-primary" style="padding:21px;margin-top:8px;font-size:17px" onclick="calcVerdict()">
+        GET MY FULL REPORT →
+      </button>
+      ` : `
+      <button class="btn" disabled style="padding:21px;margin-top:8px;font-size:17px">
+        Answer ${total-done} more checks to get the report
+      </button>
+      `}
+      <button class="btn btn-ghost" style="padding:14px;font-size:14px;margin-top:10px" onclick="calcVerdict()">
+        Skip to Report Now
+      </button>
+    </div>
+  </div>`;
+}
+
+function buildFrontendNegotiationScript(v, car) {
+  const recall = S.nhtsa.recalls.length > 0;
+  const complaints = S.nhtsa.complaints.length;
+  const critFails = v.critFails;
+  const fails = v.fails;
+  const score = v.score;
+  const carName = `${car.year} ${car.make} ${car.model}`;
+  const scripts = [];
+
+  if (recall) {
+    const rec = S.nhtsa.recalls[0];
+    const comp = rec.Component || 'a safety component';
+    const campNum = rec.NHTSACampaignNumber || 'on file';
+    scripts.push({
+      leverage: 'HIGH',
+      color: 'var(--red)',
+      headline: 'Active Government Recall — Your Strongest Card',
+      script: `"I checked the official government recall database before coming here. This ${carName} has an active safety recall (Campaign ${campNum}) affecting ${comp}. I cannot accept liability for this. Either provide me written proof the recall was completed today at no charge — or reduce the price by a minimum of $1,200 to cover my own rectification costs. I am ready to buy today if we resolve this now."`
+    });
+  }
+
+  if (critFails >= 2) {
+    scripts.push({
+      leverage: 'HIGH',
+      color: 'var(--red)',
+      headline: 'Multiple Critical Failures Found',
+      script: `"My pre-purchase inspection flagged ${critFails} serious problems on this car. I have documented each one. The combined repair estimate for these issues is significant. I am a serious buyer and I am ready to proceed — but only at a price that reflects the actual condition. My offer accounts for the repair liability."`
+    });
+  } else if (critFails === 1) {
+    const item = v.failedItems.find(i=>i.critical);
+    const label = item ? item.cat : 'a critical component';
+    scripts.push({
+      leverage: 'HIGH',
+      color: 'var(--red)',
+      headline: 'Critical Fault Documented',
+      script: `"My inspection found a critical issue with ${label} on this vehicle. This is not cosmetic — it affects safety and value. I'm willing to move forward today, but I need the price adjusted to reflect the cost of rectifying this fault before I can safely drive this car."`
+    });
+  }
+
+  if (complaints > 50) {
+    scripts.push({
+      leverage: 'MEDIUM',
+      color: 'var(--amber)',
+      headline: `${complaints}+ Government Complaints on File`,
+      script: `"I pulled the government complaints database before coming here. This ${carName} has over ${complaints} owner complaints filed — well above average for a vehicle of this age. That level of complaint volume tells me there are systemic issues. I factor that risk into what I'm willing to pay."`
+    });
+  }
+
+  if (fails > 0 && critFails === 0) {
+    scripts.push({
+      leverage: 'MEDIUM',
+      color: 'var(--amber)',
+      headline: 'Inspection Issues Found — Negotiation Leverage',
+      script: `"My inspection identified ${fails} item${fails>1?'s':''} that need attention on this car. None are dealbreakers on their own, but combined, they represent real money I'll need to spend after purchase. I'd like to reflect that in the price — I'm not trying to take advantage, I just want a fair deal for both of us."`
+    });
+  }
+
+  if (score >= 78 && critFails === 0) {
+    scripts.push({
+      leverage: 'STANDARD',
+      color: 'var(--teal)',
+      headline: 'Strong Position — But Always Negotiate',
+      script: `"This car checked out well in my inspection, which I appreciate. That said, every negotiation has room. I've done my research on current market prices for this model, and I have a number in mind that I believe is fair for both of us. Can we talk about that?"`
+    });
+    scripts.push({
+      leverage: 'STANDARD',
+      color: 'var(--teal)',
+      headline: 'The Walk-Away Anchor',
+      script: `"I'm genuinely interested in this ${carName}, but I'm also looking at two other cars today. My decision comes down to price. If we can agree on the right number right now, I'll stop looking and we can close this today. What's your best offer?"`
+    });
+  }
+
+  if (scripts.length === 0) {
+    scripts.push({
+      leverage: 'STANDARD',
+      color: 'var(--teal)',
+      headline: 'Professional Opener',
+      script: `"I've completed a full pre-purchase check of this ${carName} using official government data and a physical inspection. I'm a serious buyer — I'm ready to proceed today. But I need the price to reflect the car's actual verified condition, not the sticker. Let's talk numbers."`
+    });
+  }
+
+  return scripts.map(s => `
+    <div class="leverage-card ${s.leverage==='HIGH'?'':s.leverage==='MEDIUM'?'medium':'standard'}" style="margin-bottom:12px">
+      <div class="leverage-badge ${s.leverage==='HIGH'?'high':s.leverage==='MEDIUM'?'medium':'standard'}">${s.leverage} LEVERAGE</div>
+      <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px">${s.headline}</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.7;font-style:italic;border-left:2px solid ${s.color};padding-left:10px">${s.script}</div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════
+// VERDICT / RESULTS SCREEN
+// ═══════════════════════════════════════════════════
+function renderVerdict() {
+  const v=S.verdict;
+  const vc = v.buy?'var(--green)':v.neg?'var(--amber)':'var(--red)';
+  const icon = v.buy?'✅':v.neg?'⚠️':'🚫';
+  const label = v.buy?'SAFE TO BUY':v.neg?'NEGOTIATE HARD':'WALK AWAY';
+  const msg = v.buy
+    ? `This car passed all the important checks. You can buy it with confidence — at a fair price.`
+    : v.neg
+    ? `${v.critFails} serious and ${v.fails} total problems found. Use each failed check as leverage to lower the price.`
+    : `${v.critFails} serious problem${v.critFails!==1?'s':''} found. The cost to fix this car is too high for what they are asking.`;
+
+  const disc = v.score>=78?3:v.score>=60?10:v.score>=45?20:30;
+
+  let minCost=0, maxCost=0;
+  v.failedItems.forEach(item=>{
+    const rc=getRepairCost(item.label);
+    if(rc){minCost+=rc.min;maxCost+=rc.max;}
+  });
+
+  const gf = S.globalForensic;
+  const marketDelta = gf?.marketDelta;
+  const negotiation = gf?.negotiationScript;
+  const layer1 = gf?.layer1;
+  const layer2 = gf?.layer2;
+  const dbName = layer1?.dbName || (S.car.country==='USA'?'NHTSA (United States)':'Official Safety Database');
+  const timestamp = new Date().toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  // Confidence rating
+  const hasOfficialData = S.nhtsa.recalls.length>0||S.nhtsa.complaints.length>5;
+  const hasForensic = !!gf;
+  const confidenceScore = hasOfficialData&&hasForensic?85:hasOfficialData||hasForensic?60:40;
+  const confidenceLabel = confidenceScore>=80?'High':'Medium';
+
+  return `<div class="fade-up">
+    <div id="topBar">
+      <button class="back-btn" onclick="${v.checkLevel===3?'S.phase=\'level3\';render()':v.checkLevel===2?'S.phase=\'level2\';render()':'S.phase=\'checklist\';render()'}">← Back to Checks</button>
+      <button class="back-btn" onclick="S.phase='home';S.answers={};S.verdict=null;render()" style="color:var(--teal)">🏠 Home</button>
+    </div>
+    <div style="padding:20px 20px 20px">
+
+      <!-- MAIN VERDICT CARD -->
+      <div class="card" style="border-color:${vc}55;text-align:center;padding:28px 20px;margin-bottom:16px">
+        <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:3px;margin-bottom:12px">CAR CHECK COMPLETE</div>
+        <div style="font-size:48px;margin-bottom:10px">${icon}</div>
+        <div style="font-size:26px;font-weight:900;color:${vc};letter-spacing:-0.5px;margin-bottom:10px">${label}</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px">${msg}</div>
+        <div style="font-size:72px;font-weight:900;color:${vc};font-family:var(--fm);line-height:1;margin-bottom:4px">${v.score}</div>
+        <div style="font-size:11px;font-family:var(--fm);color:var(--muted2);letter-spacing:2px">CAR HEALTH SCORE / 100</div>
+        ${v.hasActiveRecall?`<div style="margin-top:12px;font-size:11px;font-family:var(--fm);color:var(--red);background:rgba(239,68,68,0.1);border-radius:8px;padding:6px 12px">⚠ SCORE CAPPED — Active Government Recall Found</div>`:''}
+      </div>
+
+      <!-- VEHICLE SUMMARY -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">📋 Vehicle Summary</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:17px;font-weight:900">${S.car.year} ${S.car.make} ${S.car.model}</div>
+          <div class="src-label"><div class="src-dot" style="background:${confidenceScore>=80?'var(--green)':'var(--amber)'}"></div>${confidenceLabel} Data</div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px">Country: ${S.car.country||'USA'}${S.car.vin?` · VIN: <span style="font-family:var(--fm)">${S.car.vin}</span>`:''}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--muted2);font-family:var(--fm)">Checks: ${v.checkLevel===2?'L1+L2':'L1 Only'}</span>
+          <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--muted2);font-family:var(--fm)">Fails: ${v.fails}</span>
+          <span style="font-size:11px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--muted2);font-family:var(--fm)">Source: ${dbName}</span>
+        </div>
+
+        <!-- CONFIDENCE INDICATOR -->
+        <div style="margin-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+            <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:1px">DATA CONFIDENCE</div>
+            <div style="font-size:10px;font-family:var(--fm);color:${confidenceScore>=80?'var(--green)':'var(--amber)'}">${confidenceScore}%</div>
+          </div>
+          <div class="confidence-bar"><div class="${confidenceScore>=80?'confidence-fill-high':confidenceScore>=50?'confidence-fill-med':'confidence-fill-low'}" style="width:${confidenceScore}%"></div></div>
+          <div style="font-size:11px;color:var(--muted2);margin-top:5px">Last checked: ${timestamp}</div>
+        </div>
+      </div>
+
+      <!-- OFFICIAL DATABASE STATUS -->
+      ${layer1?`
+      <div class="oracle-section" style="margin-bottom:14px">
+        <div class="oracle-label">🏛️ Official Safety Records — ${dbName}</div>
+        ${layer1.recalls&&layer1.recalls.length>0?`
+          <div style="font-size:12px;color:var(--red);font-family:var(--fm);font-weight:700">⚠ ${layer1.recalls.length} ACTIVE RECALL${layer1.recalls.length>1?'S':''} ON FILE</div>
+          ${layer1.recalls.slice(0,2).map(r=>`<div style="font-size:11px;color:var(--text2);margin-top:6px;padding:8px;background:rgba(239,68,68,0.08);border-radius:6px;">${r.Component||r.component||'Safety component'}: ${(r.Summary||r.summary||'See government database for full details').substring(0,100)}</div>`).join('')}
+        `:S.nhtsa.recalls.length>0?`
+          <div style="font-size:12px;color:var(--red);font-family:var(--fm);font-weight:700">⚠ ${S.nhtsa.recalls.length} ACTIVE RECALL${S.nhtsa.recalls.length>1?'S':''} ON FILE</div>
+          ${S.nhtsa.recalls.slice(0,2).map(r=>`<div style="font-size:11px;color:var(--text2);margin-top:6px;padding:8px;background:rgba(239,68,68,0.08);border-radius:6px;">${r.Component||'Component'}: ${(r.Summary||'See NHTSA.gov for details').substring(0,100)}</div>`).join('')}
+        `:S.nhtsa.complaints.length>0?`
+          <div style="font-size:12px;color:var(--amber);font-family:var(--fm)">⚠ ${S.nhtsa.complaints.length} Owner Complaints on File</div>
+          <div style="font-size:11px;color:var(--muted2);margin-top:4px;line-height:1.6">No open recalls found, but complaints were filed by owners. Review checklist results carefully.</div>
+        `:`
+          <div style="font-size:12px;color:var(--green);font-family:var(--fm)">✓ No active recalls found in official database</div>
+          <div style="font-size:11px;color:var(--muted2);margin-top:4px;line-height:1.6">We ran a live check. No open recalls. Good sign — always verify at nhtsa.gov</div>
+        `}
+        ${layer1.investigations&&layer1.investigations.length>0?`<div style="font-size:12px;color:var(--amber);font-family:var(--fm);margin-top:6px">⚠ ${layer1.investigations.length} Open Safety Investigation${layer1.investigations.length>1?'s':''}</div>`:''}
+      </div>`:''}
+
+      <!-- LIVE WEB CHECK — LAYER 2 -->
+      ${layer2&&layer2.failures&&layer2.failures.length>0?`
+      <div class="oracle-section" style="margin-bottom:14px">
+        <div class="oracle-label">🔍 Live Internet Check — Known Issues Found</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">These issues have been reported by other owners of this model online:</div>
+        ${layer2.failures.map(f=>`<div style="font-size:12px;color:var(--amber);margin-top:4px">• ${f}</div>`).join('')}
+      </div>`:''}
+
+      <!-- MARKET PRICE ANALYSIS -->
+      ${marketDelta&&marketDelta.optimalPrice?`
+      <div class="card" style="margin-bottom:16px;border-color:rgba(45,212,191,0.3)">
+        <div class="section-title">💰 Market Price Analysis</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="background:var(--bg2);border-radius:var(--rs);padding:10px;text-align:center">
+            <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:1px">MARKET AVG</div>
+            <div style="font-size:16px;font-weight:900;color:var(--text);margin-top:4px">${marketDelta.avgPriceFormatted}</div>
+          </div>
+          <div style="background:rgba(239,68,68,0.1);border-radius:var(--rs);padding:10px;text-align:center">
+            <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:1px">REPAIR RISK</div>
+            <div style="font-size:16px;font-weight:900;color:var(--red);margin-top:4px">-${marketDelta.repairCostsFormatted||'$0'}</div>
+          </div>
+          <div style="background:rgba(45,212,191,0.1);border-radius:var(--rs);padding:10px;text-align:center">
+            <div style="font-size:10px;font-family:var(--fm);color:var(--muted2);letter-spacing:1px">FAIR VALUE</div>
+            <div style="font-size:16px;font-weight:900;color:var(--teal);margin-top:4px">${marketDelta.optimalPriceFormatted}</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.7">
+          Fair Price = Market Average − Repair Costs. Source: ${marketDelta.priceSource||'Live market data'} · ${timestamp}
+        </div>
+      </div>
+      `:`
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">💰 What Should You Pay?</div>
+        <div style="background:${vc}15;border:1px solid ${vc}30;border-radius:var(--rs);padding:14px;margin-bottom:12px">
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">
+            ${v.buy?'This car is in good shape. Paying within 3% of the asking price is fair.':v.neg?`Try to negotiate <strong style="color:${vc}">${disc}–${disc+5}% BELOW the asking price</strong>. Use each failed check as a specific reason.`:`Demand at least <strong style="color:${vc}">${disc}% BELOW asking price</strong>, or walk away. The issues found are serious.`}
+          </div>
+        </div>
+        ${minCost>0?`
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px">Estimated repair costs for problems found:</div>
+        <div style="background:var(--bg2);border-radius:var(--rs);padding:12px;font-family:var(--fm);font-size:13px;color:var(--red)">
+          $${minCost.toLocaleString()} – $${maxCost.toLocaleString()} <span style="font-size:11px;color:var(--muted2)">(rough estimate only)</span>
+        </div>`:''}
+        <div style="margin-top:14px;font-size:12px;color:var(--muted2);line-height:1.7">
+          ⚠️ Live market price requires your Serper API key to be configured in the backend. Once configured, your exact car's real-time market price will appear above automatically.
+        </div>
+      </div>`}
+
+      <!-- DEALER SCRIPT / NEGOTIATION -->
+      <div class="card" style="margin-bottom:16px;border-color:rgba(239,68,68,0.25)">
+        <div style="font-size:11px;font-family:var(--fm);color:var(--red);letter-spacing:2px;margin-bottom:4px">🔐 YOURS TO USE</div>
+        <div class="section-title" style="color:var(--text);font-size:13px;margin-bottom:14px">WHAT TO SAY TO THE DEALER</div>
+
+        ${negotiation&&negotiation.scripts&&negotiation.scripts.length>0?
+          negotiation.scripts.map(s=>`
+          <div class="leverage-card ${s.leverage==='HIGH'?'':s.leverage==='MEDIUM'?'medium':'standard'}" style="margin-bottom:12px">
+            <div class="leverage-badge ${s.leverage==='HIGH'?'high':s.leverage==='MEDIUM'?'medium':'standard'}">${s.leverage} LEVERAGE</div>
+            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px">${s.headline}</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.7;font-style:italic;border-left:2px solid ${s.leverage==='HIGH'?'var(--red)':s.leverage==='MEDIUM'?'var(--amber)':'var(--teal)'};padding-left:10px">${s.script}</div>
+          </div>`).join('')
+        :v.failedItems.length>0?v.failedItems.slice(0,3).map(item=>{
+            const rc=getRepairCost(item.label);
+            const repAmt=rc?`$${Math.round((rc.min+rc.max)/2).toLocaleString()}`:'a measurable amount';
+            return `<div class="leverage-card" style="margin-bottom:12px">
+              <div class="leverage-badge high">HIGH LEVERAGE</div>
+              <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px">${item.cat} — Documented Liability</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.7;font-style:italic;border-left:2px solid var(--red);padding-left:10px">"My inspection flagged a ${item.cat} problem on this car. Based on current repair estimates, I need ${repAmt} off the asking price before I can move forward."</div>
+            </div>`;
+          }).join(''): buildFrontendNegotiationScript(v, S.car)}
+
+        <div style="margin-top:8px;font-size:11px;color:var(--muted2);line-height:1.7">
+          Stay calm and factual. The government data is publicly verifiable — use it as neutral evidence, not as an attack.
+        </div>
+      </div>
+
+      <!-- FAILED CHECKS -->
+      ${v.failedItems.length>0?`
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">❌ Problems Found (${v.failedItems.length})</div>
+        ${v.failedItems.map(item=>{
+          const rc=getRepairCost(item.label);
+          return `<div style="padding:12px 0;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span class="tag ${item.critical?'tag-red':'tag-amber'}">${item.critical?'CRITICAL':'WARNING'}</span>
+              ${rc?`<span style="font-size:11px;font-family:var(--fm);color:var(--muted2)">Est. $${rc.min.toLocaleString()}–$${rc.max.toLocaleString()}</span>`:''}
+            </div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6">${item.label.substring(0,180)}${item.label.length>180?'...':''}</div>
+          </div>`;
+        }).join('')}
+      </div>`:''}
+
+      <!-- L2 OFFER (if only L1 was done) -->
+     ${v.checkLevel===1&&v.score>=40?`
+      <div class="card" style="margin-bottom:16px;border-color:rgba(245,158,11,0.3)">
+        <div style="font-size:13px;font-weight:800;color:var(--amber);margin-bottom:8px">🔍 You only did Level 1</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6">The <strong>Level 2 Walk-Around</strong> and <strong>Level 3 Test Drive</strong> checks can reveal faults invisible from a distance.</div>
+        <button class="btn" style="padding:14px;font-size:14px;background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.3);margin-bottom:8px" onclick="goToLevel2()">🔍 Do Level 2 Walk-Around Checks</button>
+      </div>`:''}
+      ${v.checkLevel===2&&v.score>=40?`
+      <div class="card" style="margin-bottom:16px;border-color:rgba(45,212,191,0.3)">
+        <div style="font-size:13px;font-weight:800;color:var(--teal);margin-bottom:8px">🚗 Add the Test Drive Checks?</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6">Level 3 Test Drive checks reveal transmission, brake, and suspension issues only visible while driving.</div>
+        <button class="btn" style="padding:14px;font-size:14px;background:var(--teal-glow);color:var(--teal);border:1px solid rgba(45,212,191,0.3)" onclick="goToLevel3()">🚗 Do Level 3 Test Drive Checks</button>
+      </div>`:''}
+
+      <!-- ACTION BUTTONS -->
+      <button class="btn btn-primary" style="margin-bottom:10px;padding:18px" onclick="S.phase='input';S.car={year:'',make:'',model:'',country:S.car.country,vin:''};S.answers={};S.verdict=null;S.checkLevel=1;render()">🔍 Check Another Car</button>
+      <button class="btn btn-ghost" style="padding:18px;margin-bottom:10px" onclick="S.showTokenModal=true;render()">🎯 Get More Tokens</button>
+
+      <!-- RESULTS DISCLAIMER FOOTER -->
+      <div class="results-disclaimer">
+        <strong>⚠ Important Notice</strong><br>
+        This tool provides data-driven guidance based on public government records and owner reports. It is <strong>not a substitute for a professional mechanical inspection</strong> by a licensed technician. CARZMOOD makes no guarantees of accuracy and is not liable for mechanical failures, hidden defects, or purchase decisions made based on this report. Always have a qualified mechanic inspect any vehicle before buying.
+      </div>
+
+      <div style="text-align:center;font-size:11px;color:var(--muted);margin-bottom:24px;font-family:var(--fm)">
+        Data sources: NHTSA · ${dbName} · Live market data · ${timestamp}
+      </div>
+
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// ACCOUNT SCREEN
+// ═══════════════════════════════════════════════════
+function renderAccount() {
+  if (S.acctSub==='changePass') return renderChangePass();
+  return `<div class="fade-up">
+    <div id="topBar">
+      <button class="back-btn" onclick="S.phase='home';render()">← Back</button>
+      <div style="font-size:14px;font-weight:800;color:var(--teal)">My Account</div>
+    </div>
+    <div style="padding:20px 20px 80px">
+      ${S.acctOk?`<div class="ok-box" style="margin-bottom:16px">✓ ${S.acctOk}</div>`:''}
+      ${S.acctErr?`<div class="err-box" style="margin-bottom:16px">${S.acctErr}</div>`:''}
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">Account Details</div>
+        <div class="acct-row"><div style="font-size:13px;color:var(--muted2)">Email</div><div style="font-size:13px;font-weight:700;font-family:var(--fm)">${S.user.email}</div></div>
+        <div class="acct-row"><div style="font-size:13px;color:var(--muted2)">Member Since</div><div style="font-size:13px;font-weight:700;font-family:var(--fm)">${S.user.joined||'—'}</div></div>
+        <div class="acct-row">
+          <div style="font-size:13px;color:var(--muted2)">Tokens Remaining</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="font-size:16px;font-weight:900;color:var(--teal);font-family:var(--fm)">${S.user.tokens}</div>
+            <button onclick="refreshTokens()" style="background:none;border:1px solid var(--border);border-radius:20px;color:var(--muted2);font-size:11px;padding:3px 10px;cursor:pointer;font-family:var(--fm)">↻ Refresh</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">Security</div>
+        <div style="background:var(--teal-glow2);border:1px solid rgba(45,212,191,0.2);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.7">
+          🛡️ <strong style="color:var(--teal)">Device Verification Active.</strong> Any login from a new device requires a one-time email code.
+        </div>
+        <button class="btn btn-ghost" style="margin-bottom:10px;font-size:14px;padding:15px" onclick="S.acctSub='changePass';S.acctErr='';S.acctOk='';render()">🔑 Change Password</button>
+        <button class="btn" style="padding:15px;font-size:14px;background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.25)" onclick="resetDevices()">📵 Sign Out All Devices</button>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="section-title">Token Management</div>
+        <button class="btn btn-primary" style="margin-bottom:10px;font-size:14px;padding:15px" onclick="S.showTokenModal=true;render()">🎯 Buy More Tokens</button>
+      </div>
+      <div class="card" style="margin-bottom:16px;border-color:rgba(239,68,68,0.25)">
+        <div class="section-title" style="color:var(--red)">Danger Zone</div>
+        <button class="btn btn-ghost" style="margin-bottom:10px;font-size:14px;padding:15px" onclick="logout()">🚪 Sign Out</button>
+        <button class="btn btn-red" style="font-size:14px;padding:15px" onclick="handleDeleteAccount()">🗑️ Delete My Account</button>
+      </div>
+      <div class="results-disclaimer">
+        <strong>About CARZMOOD</strong><br>
+        This tool provides data-driven guidance from public records. It is not a substitute for a professional mechanical inspection. CARZMOOD is not liable for purchase decisions made from this app.
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderChangePass() {
+  return `<div class="fade-up">
+    <div id="topBar">
+      <button class="back-btn" onclick="S.acctSub='main';S.acctErr='';render()">← Back</button>
+      <div style="font-size:14px;font-weight:800">Change Password</div>
+      <button class="back-btn" onclick="S.phase='home';S.acctSub='main';render()" style="color:var(--teal)">🏠 Home</button>
+    </div>
+    <div style="padding:20px 20px 60px">
+      ${S.acctErr?`<div class="err-box" style="margin-bottom:14px">${S.acctErr}</div>`:''}
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div><label class="lbl">Current Password</label><div class="pass-wrap"><input id="chgOld" class="inp" type="password" placeholder="Your current password"><button class="pass-eye" id="cpe1" onclick="togglePass('chgOld','cpe1')" type="button">👁️</button></div></div>
+        <div><label class="lbl">New Password</label><div class="pass-wrap"><input id="chgNew1" class="inp" type="password" placeholder="New password (6+ characters)"><button class="pass-eye" id="cpe2" onclick="togglePass('chgNew1','cpe2')" type="button">👁️</button></div></div>
+        <div><label class="lbl">Confirm New Password</label><div class="pass-wrap"><input id="chgNew2" class="inp" type="password" placeholder="Repeat new password"><button class="pass-eye" id="cpe3" onclick="togglePass('chgNew2','cpe3')" type="button">👁️</button></div></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:20px;padding:18px" onclick="handleChangePass()" ${S.authLoading?'disabled':''}>
+        ${S.authLoading?`<span class="wait-anim"><span></span><span></span><span></span></span> Saving...`:'Save New Password →'}
+      </button>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// TOKEN MODAL
+// ═══════════════════════════════════════════════════
+function renderTokenModal() {
+  const packs = [
+    {url:CFG.GUMROAD.PACK10,  name:'Starter',  tokens:10,  price:'$2.99',  desc:'Great for occasional buyers'},
+    {url:CFG.GUMROAD.PACK50,  name:'Pro',       tokens:50,  price:'$9.99',  desc:'Best value · most popular', featured:true},
+    {url:CFG.GUMROAD.PACK200, name:'Dealer',    tokens:200, price:'$29.99', desc:'For agents and car dealers'},
+  ];
+  const ol=document.createElement('div'); ol.className='modal-overlay';
+  ol.onclick=e=>{if(e.target===ol){S.showTokenModal=false;render();}};
+  ol.innerHTML=`<div class="modal-sheet">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div style="font-size:22px;font-weight:900">🎯 Top Up Tokens</div>
+      <button onclick="S.showTokenModal=false;render()" style="background:none;border:none;color:var(--muted2);font-size:26px;cursor:pointer;line-height:1">×</button>
+    </div>
+    <div style="font-size:13px;color:var(--muted2);margin-bottom:18px">Each token = one full car check. Tokens are added to your account automatically after purchase.</div>
+    ${packs.map(p=>{
+      const url=`${p.url}?email=${esc(S.user?.email||'')}`;
+      return `<div class="pack-card ${p.featured?'featured':''}" onclick="window.open('${url}','_blank')">
+        ${p.featured?'<div class="popular-badge">🔥 BEST VALUE</div>':''}
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:900;font-size:17px">${p.name} Pack</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:3px">${p.tokens} car checks — ${p.desc}</div>
+          </div>
+          <div style="font-size:24px;font-weight:900;color:var(--teal);flex-shrink:0">${p.price}</div>
+        </div>
+      </div>`;
+    }).join('')}
+    <div style="font-size:11px;color:var(--muted2);text-align:center;margin-top:8px;line-height:1.7">
+      Secure checkout via Gumroad. Tokens added automatically after purchase.<br>
+      <button onclick="refreshTokens();S.showTokenModal=false;render()" style="background:none;border:none;color:var(--teal);font-size:11px;cursor:pointer;text-decoration:underline;margin-top:4px;font-family:var(--fm)">Already purchased? Tap here to refresh your tokens →</button>
+    </div>
+  </div>`;
+  document.body.appendChild(ol);
+}
+
+// ═══════════════════════════════════════════════════
+// TOS / PRIVACY MODALS
+// ═══════════════════════════════════════════════════
+function showTOS() {
+  const ol = document.createElement('div');
+  ol.className = 'modal-overlay';
+  ol.onclick = e=>{ if(e.target===ol) ol.remove(); };
+  ol.innerHTML = `<div class="modal-sheet" style="padding-bottom:48px;max-height:85dvh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-size:18px;font-weight:900">📄 Terms of Service</div>
+      <button onclick="this.closest('.modal-overlay').remove()" style="background:none;border:none;color:var(--muted2);font-size:26px;cursor:pointer;line-height:1">×</button>
+    </div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8">
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">1. What This Tool Does</strong><br>DealerDefense provides information based on public government safety records, owner complaint data, and estimated market values. It is meant to help you ask better questions when buying a used car.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">2. Not a Replacement for a Mechanic</strong><br>This tool does NOT replace a professional mechanical inspection. Always have a licensed mechanic inspect any vehicle before purchasing. We do not take responsibility for any defects, failures, or losses you experience after buying a car.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">3. Data Accuracy</strong><br>We do our best to provide accurate information from reputable sources. However, we cannot guarantee the accuracy, completeness, or timeliness of any data. Use this as one tool among many — not as the only basis for your decision.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">4. Tokens and Payments</strong><br>Tokens are purchased through Gumroad and are non-refundable once used. Unused tokens may be refunded within 14 days of purchase.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">5. Accounts</strong><br>You may create additional accounts. Duplicate accounts from the same device or IP receive standard account terms. Do not share accounts or use this service for commercial resale without a dealer license.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">6. Limitation of Liability</strong><br>CARZMOOD and DealerDefense are not liable for any financial loss, mechanical failure, injury, or damage resulting from your use of this tool or your purchase decision.</p>
+      <p><strong style="color:var(--text)">7. Changes</strong><br>We may update these terms at any time. Continued use of the service means you accept the latest terms.</p>
+    </div>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="this.closest('.modal-overlay').remove()">Got it →</button>
+  </div>`;
+  document.body.appendChild(ol);
+}
+
+function showPrivacy() {
+  const ol = document.createElement('div');
+  ol.className = 'modal-overlay';
+  ol.onclick = e=>{ if(e.target===ol) ol.remove(); };
+  ol.innerHTML = `<div class="modal-sheet" style="padding-bottom:48px;max-height:85dvh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-size:18px;font-weight:900">🔒 Privacy Policy</div>
+      <button onclick="this.closest('.modal-overlay').remove()" style="background:none;border:none;color:var(--muted2);font-size:26px;cursor:pointer;line-height:1">×</button>
+    </div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8">
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">What We Collect</strong><br>We collect your email address, a hashed (not reversible) version of your password, your IP address, and the car data you enter for analysis.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">How We Use It</strong><br>Your email is used for account login and security codes. Your IP is recorded to prevent abuse of free trials. Car searches are used to generate your report and improve the service.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">We Do Not</strong><br>We do not sell your data to third parties. We do not share your searches with advertisers. We do not store your full password — only a one-way hash.</p>
+      <p style="margin-bottom:12px"><strong style="color:var(--text)">Data Storage</strong><br>All data is stored securely in Google Sheets via Google Apps Script. Google's security and privacy policies apply.</p>
+      <p><strong style="color:var(--text)">Your Rights</strong><br>You can delete your account at any time from the Account screen. This removes your email, password hash, and token balance from our system.</p>
+    </div>
+    <button class="btn btn-primary" style="margin-top:20px" onclick="this.closest('.modal-overlay').remove()">Got it →</button>
+  </div>`;
+  document.body.appendChild(ol);
+}
+
+// ═══════════════════════════════════════════════════
+// FEEDBACK
+// ═══════════════════════════════════════════════════
+function openFeedback(){$('fbPanel').classList.add('open');$('fbOverlay').classList.add('open');}
+function closeFeedback(){$('fbPanel').classList.remove('open');$('fbOverlay').classList.remove('open');}
+async function submitFeedback(){
+  const msg=$('fbText').value; if(!msg)return;
+  $('fbStatus').textContent='Sending...';
+  await gasPost({action:'feedback', email:S.user?.email||'Anonymous', message:msg});
+  $('fbStatus').textContent='✓ Sent! Thank you.'; $('fbText').value='';
+  setTimeout(closeFeedback,2000);
+}
+
+const fbBubble = $('fbBubble');
+const fbTooltip = $('fbTooltip');
+fbBubble.addEventListener('mouseenter',()=>fbTooltip.classList.add('show'));
+fbBubble.addEventListener('mouseleave',()=>fbTooltip.classList.remove('show'));
+fbBubble.onclick = openFeedback;
+
+// ═══════════════════════════════════════════════════
+// PWA / INSTALL
+// ═══════════════════════════════════════════════════
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
+  $('installBar').classList.add('visible');
+});
+
+function showInstallModal() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(()=>{deferredPrompt=null;$('installBar').classList.remove('visible');});
+    return;
+  }
+  const ol = document.createElement('div');
+  ol.className = 'modal-overlay';
+  ol.onclick = e=>{ if(e.target===ol) ol.remove(); };
+  ol.innerHTML = `<div class="modal-sheet" style="padding-bottom:44px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div style="font-size:20px;font-weight:900">📲 Add to Your Home Screen</div>
+      <button onclick="this.closest('.modal-overlay').remove()" style="background:none;border:none;color:var(--muted2);font-size:26px;cursor:pointer;line-height:1">×</button>
+    </div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:18px">Choose your device for step-by-step instructions:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+      ${[
+        ['📱','iPhone / iPad','ios'],
+        ['🤖','Android Phone','android'],
+        ['🖥️','Windows PC','windows'],
+        ['🍎','Mac / MacBook','mac'],
+        ['📟','Other Device','other'],
+      ].map(([icon,label,key])=>`
+        <button onclick="showInstallSteps('${key}')" style="background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r);padding:16px 10px;cursor:pointer;text-align:center;transition:border-color 0.2s;font-family:var(--fh);color:var(--text)">
+          <div style="font-size:26px;margin-bottom:6px">${icon}</div>
+          <div style="font-size:12px;font-weight:700">${label}</div>
+        </button>`).join('')}
+    </div>
+    <div style="font-size:11px;color:var(--muted2);text-align:center">Works like a real app — no App Store needed. Completely free to install.</div>
+  </div>`;
+  document.body.appendChild(ol);
+}
+
+function showInstallSteps(device) {
+  document.querySelector('.modal-overlay')?.remove();
+  const steps = {
+    ios: {
+      title: '📱 iPhone / iPad (Safari)',
+      color: 'var(--teal)',
+      note: 'Must use Safari browser — Chrome on iOS cannot install',
+      steps: [
+        'Open this page in <strong>Safari</strong> (not Chrome)',
+        'Tap the <strong>Share</strong> button at the bottom (the box with an arrow pointing up ⬆)',
+        'Scroll down and tap <strong>"Add to Home Screen"</strong>',
+        'Tap <strong>Add</strong> — done! ✅ It now appears on your home screen like an app.'
+      ]
+    },
+    android: {
+      title: '🤖 Android (Chrome)',
+      color: '#4ade80',
+      note: 'Use Chrome browser for best results',
+      steps: [
+        'Open this page in <strong>Chrome</strong>',
+        'Tap the <strong>three dots menu (⋮)</strong> in the top right',
+        'Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>',
+        'Tap <strong>Add</strong> — done! ✅'
+      ]
+    },
+    windows: {
+      title: '🖥️ Windows PC (Chrome / Edge)',
+      color: 'var(--teal)',
+      note: 'Works in Chrome or Edge browsers',
+      steps: [
+        'Open this page in <strong>Chrome</strong> or <strong>Edge</strong>',
+        'Look for the <strong>install icon (⊕)</strong> in the address bar on the right',
+        'Or click the <strong>menu (⋮)</strong> → <strong>"Install DealerDefense"</strong>',
+        'Click <strong>Install</strong> — it\'s now on your desktop! ✅'
+      ]
+    },
+    mac: {
+      title: '🍎 Mac / MacBook',
+      color: 'var(--teal)',
+      note: 'Works in Chrome, Edge, or Safari',
+      steps: [
+        '<strong>Chrome / Edge:</strong> Look for the install icon in the address bar → Click → Install',
+        '<strong>Safari (macOS Sonoma+):</strong> Go to <strong>File → Add to Dock</strong>',
+        'The app will appear in your Dock or Desktop ✅'
+      ]
+    },
+    other: {
+      title: '📟 Other Device',
+      color: 'var(--amber)',
+      note: '',
+      steps: [
+        'Open this page in your browser',
+        'Look for the browser menu (usually three dots or lines)',
+        'Look for <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>',
+        'Follow the on-screen steps — done! ✅'
+      ]
+    }
+  };
+  const d = steps[device] || steps.other;
+  const ol = document.createElement('div');
+  ol.className = 'modal-overlay';
+  ol.onclick = e=>{ if(e.target===ol) ol.remove(); };
+  ol.innerHTML = `<div class="modal-sheet" style="padding-bottom:44px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div style="font-size:18px;font-weight:900">${d.title}</div>
+      <button onclick="this.closest('.modal-overlay').remove()" style="background:none;border:none;color:var(--muted2);font-size:26px;cursor:pointer;line-height:1">×</button>
+    </div>
+    ${d.note?`<div style="font-size:11px;font-family:var(--fm);color:${d.color};margin-bottom:16px">ℹ ${d.note}</div>`:'<div style="margin-bottom:16px"></div>'}
+    <div style="display:flex;flex-direction:column;gap:10px">
+      ${d.steps.map((s,i)=>`
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="background:${d.color};color:#000;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px">${i+1}</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7">${s}</div>
+        </div>`).join('')}
+    </div>
+    <button onclick="showInstallModal()" style="margin-top:20px;background:none;border:1px solid var(--border);border-radius:var(--rs);color:var(--muted2);font-size:13px;padding:10px;width:100%;cursor:pointer;font-family:var(--fh)">← Pick a different device</button>
+  </div>`;
+  document.body.appendChild(ol);
+}
+
+function installPWA() { showInstallModal(); }
+
+// ═══════════════════════════════════════════════════
+// SERVICE WORKER REGISTRATION
+// ═══════════════════════════════════════════════════
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════
+window.onload=()=>{
+  const saved = localStorage.getItem('cm_user');
+  const sessionSaved = sessionStorage.getItem('cm_user_session');
+  if (saved) {
+    try { S.user=JSON.parse(saved); S.phase='home'; } catch { S.phase='auth'; }
+  } else if (sessionSaved) {
+    try { S.user=JSON.parse(sessionSaved); S.phase='home'; } catch { S.phase='auth'; }
+  } else {
+    S.phase='auth';
+  }
+  setTimeout(()=>{
+    $('splash').style.opacity='0';
+    setTimeout(()=>$('splash').style.display='none',500);
+    render();
+  },1800);
+};
+
+window.addEventListener('pagehide', () => {
+  if (!localStorage.getItem('cm_user')) {
+    sessionStorage.removeItem('cm_user_session');
+  }
+});
+</script>
+</body>
+</html>
